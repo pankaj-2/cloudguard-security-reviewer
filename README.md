@@ -64,10 +64,3 @@ HIGH findings: 8
 Report: single self-contained HTML file, no dependencies
 ```
 
-## JD alignment — Google Security Engineer
-- Security reviews and maturity assessments ✓
-- GCP cloud security controls ✓
-- Container and microservice security ✓
-- DevOps/CI-CD security risks ✓
-- Zero Trust architecture assessment ✓
-- Consulting-style deliverable for clients ✓
