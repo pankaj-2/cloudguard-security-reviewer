@@ -3,10 +3,13 @@
 ## Completed
 
 - [x] Phase 1: Structure + mock data
+- [x] Phase 2: Scanner engines (gcp_iam, container, cicd, terraform)
+- [x] Phase 3: NIST scorer (NIST CSF + Zero Trust pillar scoring, maturity band, output/scores.json)
+- [x] Phase 4: Report + main.py
 
 ## Next
 
-Phase 2: Scanner engines
+Phase 5 — README + GitHub
 
 ## All files written
 
