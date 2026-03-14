@@ -1,0 +1,66 @@
+version: "3.8"
+
+services:
+  # ── CRITICAL: Privileged container ──────────────────────────────────────────
+  admin-tools:
+    image: busybox:latest            # No pinned digest — version drift risk
+    privileged: true                 # CRITICAL: Full host access
+    volumes:
+      - /etc/passwd:/etc/passwd:ro   # CRITICAL: Host filesystem exposure
+    environment:
+      ADMIN_TOKEN: "super_secret_admin_token_1234"  # HIGH: Hardcoded secret
+    command: ["sleep", "infinity"]
+
+  # ── CRITICAL: Host network mode ──────────────────────────────────────────────
+  network-utils:
+    image: nicolaka/netshoot:latest  # No pinned digest
+    network_mode: "host"             # CRITICAL: Bypasses network namespace
+    environment:
+      DEBUG_MODE: "true"
+    # No user: specified — runs as root by default
+
+  # ── HIGH: Hardcoded database credentials ─────────────────────────────────────
+  postgres:
+    image: postgres:15               # Not pinned by digest
+    environment:
+      POSTGRES_USER: "admin"
+      POSTGRES_PASSWORD: "admin123"  # HIGH: Hardcoded credential
+      POSTGRES_DB: "appdb"
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  # ── HIGH: Hardcoded API key, runs as root ─────────────────────────────────────
+  api-service:
+    image: node:18-alpine            # No digest pin
+    # No user: directive — container runs as root
+    environment:
+      NODE_ENV: "production"
+      API_KEY: "hardcoded_key_xyz"   # HIGH: Secret in plain text
+      DB_PASSWORD: "admin123"        # HIGH: Duplicate secret exposure
+      JWT_SECRET: "my-jwt-secret-do-not-share"  # HIGH: JWT secret exposed
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./app:/app
+
+  # ── MEDIUM: Overly permissive capabilities ────────────────────────────────────
+  web-proxy:
+    image: nginx:latest              # No pinned digest
+    cap_add:
+      - NET_ADMIN                    # MEDIUM: Unnecessary capability
+      - SYS_ADMIN                    # HIGH: Very broad capability
+    ports:
+      - "80:80"
+      - "443:443"
+
+  # ── OK: Reasonably configured service ────────────────────────────────────────
+  cache:
+    image: redis:7.2.3               # Versioned but not digest-pinned
+    user: "999:999"
+    read_only: true
+    command: ["redis-server", "--requirepass", "${REDIS_PASSWORD}"]  # Env var, not hardcoded
+
+volumes:
+  pgdata:

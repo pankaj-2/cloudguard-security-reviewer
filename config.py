@@ -1,0 +1,3 @@
+USE_MOCK_DATA = True
+GEMINI_API_KEY_ENV = "GEMINI_API_KEY"
+GEMINI_MODEL = "gemini-1.5-flash"

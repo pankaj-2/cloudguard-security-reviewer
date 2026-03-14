@@ -1,0 +1,5 @@
+google-generativeai
+python-dotenv
+pyyaml
+python-hcl2
+jinja2

@@ -1,0 +1,134 @@
+---
+# ── ClusterRoleBinding: overly broad admin access ──────────────────────────────
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: app-admin-binding
+subjects:
+  - kind: ServiceAccount
+    name: app-service-account
+    namespace: default
+roleRef:
+  kind: ClusterRole
+  apiRef: cluster-admin              # HIGH: Grants full cluster admin
+  apiGroup: rbac.authorization.k8s.io
+
+---
+# ── ServiceAccount: auto-mounts token with admin binding ──────────────────────
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: app-service-account
+  namespace: default
+automountServiceAccountToken: true   # HIGH: Token auto-mounted with admin ClusterRole
+
+---
+# ── Deployment: multiple container security misconfigurations ─────────────────
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vulnerable-app
+  namespace: default
+  labels:
+    app: vulnerable-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: vulnerable-app
+  template:
+    metadata:
+      labels:
+        app: vulnerable-app
+    spec:
+      serviceAccountName: app-service-account
+      hostNetwork: true              # CRITICAL: Pod shares host network namespace
+      hostPID: true                  # CRITICAL: Pod shares host PID namespace
+
+      containers:
+        - name: main-app
+          image: myapp:latest        # HIGH: No pinned digest, mutable tag
+          # No securityContext defined  CRITICAL: Unrestricted container defaults
+          # No resources defined        HIGH: No CPU/memory limits
+          ports:
+            - containerPort: 8080
+          env:
+            - name: NODE_ENV
+              value: "production"
+            - name: DB_PASSWORD
+              value: "postgres_secret_12345"   # HIGH: Hardcoded secret in manifest
+            - name: API_KEY
+              value: "ak-live-abc123def456xyz"  # HIGH: Hardcoded API key
+            - name: JWT_SECRET
+              value: "jwt_super_secret_key"     # HIGH: Hardcoded JWT secret
+
+        - name: sidecar-agent
+          image: datadog/agent:latest  # HIGH: Latest tag, no digest
+          securityContext:
+            privileged: true           # CRITICAL: Privileged sidecar
+            runAsUser: 0               # HIGH: Explicitly runs as root
+          # No resource limits defined  HIGH: Missing resource constraints
+          env:
+            - name: DD_API_KEY
+              value: "datadog_api_key_hardcoded_here"  # HIGH: Hardcoded secret
+
+        - name: log-forwarder
+          image: fluent/fluent-bit:2.1 # Versioned but not digest
+          # No securityContext          CRITICAL: Inherits container defaults
+          # No resource limits          HIGH: Unconstrained resource usage
+          volumeMounts:
+            - name: varlog
+              mountPath: /var/log
+
+      volumes:
+        - name: varlog
+          hostPath:
+            path: /var/log           # MEDIUM: Host path mount
+
+---
+# ── Second Deployment: contrast — partially configured ────────────────────────
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hardened-app
+  namespace: default
+  labels:
+    app: hardened-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: hardened-app
+  template:
+    metadata:
+      labels:
+        app: hardened-app
+    spec:
+      serviceAccountName: default
+      automountServiceAccountToken: false
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        fsGroup: 2000
+      containers:
+        - name: secure-app
+          image: secureapp:v1.2.3@sha256:abc123def456  # OK: digest-pinned
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop:
+                - ALL
+          resources:
+            limits:
+              cpu: "500m"
+              memory: "256Mi"
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+          env:
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: app-secrets   # OK: Uses K8s Secret ref
+                  key: db-password

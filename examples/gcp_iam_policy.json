@@ -1,0 +1,128 @@
+{
+  "bindings": [
+    {
+      "role": "roles/owner",
+      "members": [
+        "allUsers"
+      ]
+    },
+    {
+      "role": "roles/owner",
+      "members": [
+        "allUsers",
+        "allAuthenticatedUsers"
+      ]
+    },
+    {
+      "role": "roles/owner",
+      "members": [
+        "user:developer@company.com"
+      ]
+    },
+    {
+      "role": "roles/editor",
+      "members": [
+        "serviceAccount:app-sa@myproject.iam.gserviceaccount.com"
+      ]
+    },
+    {
+      "role": "roles/editor",
+      "members": [
+        "user:backend-dev@company.com",
+        "user:intern@company.com"
+      ]
+    },
+    {
+      "role": "roles/editor",
+      "members": [
+        "group:engineering@company.com"
+      ]
+    },
+    {
+      "role": "roles/iam.securityAdmin",
+      "members": [
+        "user:secops@company.com"
+      ]
+    },
+    {
+      "role": "roles/iam.securityAdmin",
+      "members": [
+        "serviceAccount:audit-sa@myproject.iam.gserviceaccount.com"
+      ]
+    },
+    {
+      "role": "roles/viewer",
+      "members": [
+        "group:readonly-team@company.com"
+      ]
+    },
+    {
+      "role": "roles/viewer",
+      "members": [
+        "user:analyst@company.com"
+      ]
+    },
+    {
+      "role": "roles/storage.objectViewer",
+      "members": [
+        "serviceAccount:gcs-reader@myproject.iam.gserviceaccount.com"
+      ]
+    },
+    {
+      "role": "roles/bigquery.dataViewer",
+      "members": [
+        "serviceAccount:bq-reader@myproject.iam.gserviceaccount.com"
+      ]
+    },
+    {
+      "role": "roles/cloudsql.client",
+      "members": [
+        "serviceAccount:db-client@myproject.iam.gserviceaccount.com"
+      ]
+    },
+    {
+      "role": "roles/logging.logWriter",
+      "members": [
+        "serviceAccount:log-writer@myproject.iam.gserviceaccount.com"
+      ]
+    },
+    {
+      "role": "roles/monitoring.metricWriter",
+      "members": [
+        "serviceAccount:metrics-sa@myproject.iam.gserviceaccount.com"
+      ]
+    },
+    {
+      "role": "roles/pubsub.publisher",
+      "members": [
+        "serviceAccount:pubsub-pub@myproject.iam.gserviceaccount.com"
+      ]
+    },
+    {
+      "role": "roles/pubsub.subscriber",
+      "members": [
+        "serviceAccount:pubsub-sub@myproject.iam.gserviceaccount.com"
+      ]
+    },
+    {
+      "role": "roles/run.invoker",
+      "members": [
+        "serviceAccount:cloudrun-invoker@myproject.iam.gserviceaccount.com"
+      ]
+    },
+    {
+      "role": "roles/secretmanager.secretAccessor",
+      "members": [
+        "serviceAccount:secrets-reader@myproject.iam.gserviceaccount.com"
+      ]
+    },
+    {
+      "role": "roles/compute.networkUser",
+      "members": [
+        "serviceAccount:network-user@myproject.iam.gserviceaccount.com"
+      ]
+    }
+  ],
+  "etag": "BwX2kLmN3oP=",
+  "version": 3
+}
