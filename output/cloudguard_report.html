@@ -1,0 +1,1840 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>CloudGuard Security Report — 2026-03-14 16:14 UTC</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 32px;
+      background: #f1f5f9;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+                   'Helvetica Neue', Arial, sans-serif;
+      color: #0f172a;
+      line-height: 1.6;
+    }
+    .container { max-width: 1200px; margin: 0 auto; }
+    details > summary::-webkit-details-marker { display: none; }
+    details[open] > summary {
+      border-bottom: 1px solid #e2e8f0;
+    }
+    @media (max-width: 768px) {
+      body { padding: 16px; }
+      .grid-2col { grid-template-columns: 1fr !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    
+<div style="background:linear-gradient(135deg,#0f172a 0%,#1e3a5f 100%);
+            color:#fff;padding:48px 40px;border-radius:12px;margin-bottom:32px;">
+  <div style="font-size:0.8rem;letter-spacing:0.12em;text-transform:uppercase;
+              color:#94a3b8;margin-bottom:8px;">Security Assessment</div>
+  <h1 style="margin:0 0 6px;font-size:2rem;font-weight:700;letter-spacing:-0.02em;">
+    CloudGuard — Cloud Security Posture Assessment
+  </h1>
+  <p style="margin:0 0 20px;font-size:1.05rem;color:#cbd5e1;">
+    Automated Security Review Report
+  </p>
+  <div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap;">
+    <span style="color:#94a3b8;font-size:0.9rem;">Generated: 2026-03-14 16:14 UTC</span>
+    <span style="background:#dc2626;color:#fff;border-radius:9999px;padding:4px 14px;font-size:0.85rem;font-weight:600;letter-spacing:0.05em;">Initial</span>
+  </div>
+</div>
+
+<section style="background:#fff;border:1px solid #e2e8f0;border-radius:10px;
+                padding:32px 36px;margin-bottom:28px;">
+  <h2 style="margin:0 0 16px;font-size:1.3rem;font-weight:700;color:#0f172a;">
+    Executive Summary
+  </h2>
+  <p style="margin:0;line-height:1.8;color:#334155;font-size:0.97rem;">
+    This Google Cloud environment achieved an overall security score of 0/100, placing it in the 'Initial' maturity band and indicating significant gaps relative to industry benchmarks. The most critical risk identified is the presence of 16 CRITICAL findings — including publicly accessible IAM bindings — which could allow unauthorised access to sensitive cloud resources and result in data exfiltration or regulatory penalties. Additionally, 54 HIGH-severity findings relate to over-privileged service accounts and container workloads that lack security contexts, increasing the blast radius of any successful compromise. The top recommendation is to immediately remediate all CRITICAL IAM bindings by removing 'allUsers' and 'allAuthenticatedUsers' principals, then adopt Workload Identity Federation to eliminate exported service account keys across the estate.
+  </p>
+</section>
+
+<section style="background:#fff;border:1px solid #e2e8f0;border-radius:10px;
+                padding:32px 36px;margin-bottom:28px;">
+  <h2 style="margin:0 0 24px;font-size:1.3rem;font-weight:700;color:#0f172a;">
+    Score Dashboard
+  </h2>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;">
+    <div>
+      <h3 style="margin:0 0 14px;font-size:0.95rem;font-weight:700;
+                 color:#475569;text-transform:uppercase;letter-spacing:0.07em;">
+        NIST CSF Functions
+      </h3>
+      
+<div style="margin-bottom:14px;">
+  <div style="display:flex;justify-content:space-between;
+              margin-bottom:4px;font-size:0.82rem;font-weight:600;
+              color:#475569;text-transform:uppercase;letter-spacing:0.05em;">
+    <span>IDENTIFY</span>
+  </div>
+  <div style="background:#e2e8f0;border-radius:6px;height:30px;
+              overflow:hidden;position:relative;">
+    <div style="width:90%;background:#16a34a;height:100%;
+                border-radius:6px;transition:width 0.3s;
+                display:flex;align-items:center;padding-left:10px;">
+      <span style="color:#fff;font-weight:700;font-size:0.85rem;">90</span>
+    </div>
+  </div>
+</div>
+
+<div style="margin-bottom:14px;">
+  <div style="display:flex;justify-content:space-between;
+              margin-bottom:4px;font-size:0.82rem;font-weight:600;
+              color:#475569;text-transform:uppercase;letter-spacing:0.05em;">
+    <span>PROTECT</span>
+  </div>
+  <div style="background:#e2e8f0;border-radius:6px;height:30px;
+              overflow:hidden;position:relative;">
+    <div style="width:8%;background:#dc2626;height:100%;
+                border-radius:6px;transition:width 0.3s;
+                display:flex;align-items:center;padding-left:10px;">
+      <span style="color:#fff;font-weight:700;font-size:0.85rem;">0</span>
+    </div>
+  </div>
+</div>
+
+<div style="margin-bottom:14px;">
+  <div style="display:flex;justify-content:space-between;
+              margin-bottom:4px;font-size:0.82rem;font-weight:600;
+              color:#475569;text-transform:uppercase;letter-spacing:0.05em;">
+    <span>DETECT</span>
+  </div>
+  <div style="background:#e2e8f0;border-radius:6px;height:30px;
+              overflow:hidden;position:relative;">
+    <div style="width:30%;background:#dc2626;height:100%;
+                border-radius:6px;transition:width 0.3s;
+                display:flex;align-items:center;padding-left:10px;">
+      <span style="color:#fff;font-weight:700;font-size:0.85rem;">30</span>
+    </div>
+  </div>
+</div>
+
+<div style="margin-bottom:14px;">
+  <div style="display:flex;justify-content:space-between;
+              margin-bottom:4px;font-size:0.82rem;font-weight:600;
+              color:#475569;text-transform:uppercase;letter-spacing:0.05em;">
+    <span>RESPOND</span>
+  </div>
+  <div style="background:#e2e8f0;border-radius:6px;height:30px;
+              overflow:hidden;position:relative;">
+    <div style="width:100%;background:#16a34a;height:100%;
+                border-radius:6px;transition:width 0.3s;
+                display:flex;align-items:center;padding-left:10px;">
+      <span style="color:#fff;font-weight:700;font-size:0.85rem;">100</span>
+    </div>
+  </div>
+</div>
+
+<div style="margin-bottom:14px;">
+  <div style="display:flex;justify-content:space-between;
+              margin-bottom:4px;font-size:0.82rem;font-weight:600;
+              color:#475569;text-transform:uppercase;letter-spacing:0.05em;">
+    <span>RECOVER</span>
+  </div>
+  <div style="background:#e2e8f0;border-radius:6px;height:30px;
+              overflow:hidden;position:relative;">
+    <div style="width:95%;background:#16a34a;height:100%;
+                border-radius:6px;transition:width 0.3s;
+                display:flex;align-items:center;padding-left:10px;">
+      <span style="color:#fff;font-weight:700;font-size:0.85rem;">95</span>
+    </div>
+  </div>
+</div>
+
+    </div>
+    <div>
+      <h3 style="margin:0 0 14px;font-size:0.95rem;font-weight:700;
+                 color:#475569;text-transform:uppercase;letter-spacing:0.07em;">
+        Zero Trust Pillars
+      </h3>
+      
+<div style="margin-bottom:14px;">
+  <div style="display:flex;justify-content:space-between;
+              margin-bottom:4px;font-size:0.82rem;font-weight:600;
+              color:#475569;text-transform:uppercase;letter-spacing:0.05em;">
+    <span>Identity</span>
+  </div>
+  <div style="background:#e2e8f0;border-radius:6px;height:30px;
+              overflow:hidden;position:relative;">
+    <div style="width:8%;background:#dc2626;height:100%;
+                border-radius:6px;transition:width 0.3s;
+                display:flex;align-items:center;padding-left:10px;">
+      <span style="color:#fff;font-weight:700;font-size:0.85rem;">0</span>
+    </div>
+  </div>
+</div>
+
+<div style="margin-bottom:14px;">
+  <div style="display:flex;justify-content:space-between;
+              margin-bottom:4px;font-size:0.82rem;font-weight:600;
+              color:#475569;text-transform:uppercase;letter-spacing:0.05em;">
+    <span>Workload</span>
+  </div>
+  <div style="background:#e2e8f0;border-radius:6px;height:30px;
+              overflow:hidden;position:relative;">
+    <div style="width:8%;background:#dc2626;height:100%;
+                border-radius:6px;transition:width 0.3s;
+                display:flex;align-items:center;padding-left:10px;">
+      <span style="color:#fff;font-weight:700;font-size:0.85rem;">0</span>
+    </div>
+  </div>
+</div>
+
+<div style="margin-bottom:14px;">
+  <div style="display:flex;justify-content:space-between;
+              margin-bottom:4px;font-size:0.82rem;font-weight:600;
+              color:#475569;text-transform:uppercase;letter-spacing:0.05em;">
+    <span>Network</span>
+  </div>
+  <div style="background:#e2e8f0;border-radius:6px;height:30px;
+              overflow:hidden;position:relative;">
+    <div style="width:8%;background:#dc2626;height:100%;
+                border-radius:6px;transition:width 0.3s;
+                display:flex;align-items:center;padding-left:10px;">
+      <span style="color:#fff;font-weight:700;font-size:0.85rem;">0</span>
+    </div>
+  </div>
+</div>
+
+<div style="margin-bottom:14px;">
+  <div style="display:flex;justify-content:space-between;
+              margin-bottom:4px;font-size:0.82rem;font-weight:600;
+              color:#475569;text-transform:uppercase;letter-spacing:0.05em;">
+    <span>Data</span>
+  </div>
+  <div style="background:#e2e8f0;border-radius:6px;height:30px;
+              overflow:hidden;position:relative;">
+    <div style="width:8%;background:#dc2626;height:100%;
+                border-radius:6px;transition:width 0.3s;
+                display:flex;align-items:center;padding-left:10px;">
+      <span style="color:#fff;font-weight:700;font-size:0.85rem;">0</span>
+    </div>
+  </div>
+</div>
+
+<div style="margin-bottom:14px;">
+  <div style="display:flex;justify-content:space-between;
+              margin-bottom:4px;font-size:0.82rem;font-weight:600;
+              color:#475569;text-transform:uppercase;letter-spacing:0.05em;">
+    <span>DevOps</span>
+  </div>
+  <div style="background:#e2e8f0;border-radius:6px;height:30px;
+              overflow:hidden;position:relative;">
+    <div style="width:8%;background:#dc2626;height:100%;
+                border-radius:6px;transition:width 0.3s;
+                display:flex;align-items:center;padding-left:10px;">
+      <span style="color:#fff;font-weight:700;font-size:0.85rem;">0</span>
+    </div>
+  </div>
+</div>
+
+    </div>
+  </div>
+</section>
+
+<section style="margin-bottom:28px;">
+  <h2 style="margin:0 0 20px;font-size:1.3rem;font-weight:700;color:#0f172a;">
+    Findings by Scanner
+  </h2>
+  
+<details style="border:1px solid #e2e8f0;border-radius:10px;
+                margin-bottom:16px;overflow:hidden;">
+  <summary style="background:#f8fafc;padding:18px 24px;cursor:pointer;
+                  font-weight:700;font-size:1rem;color:#0f172a;
+                  list-style:none;display:flex;justify-content:space-between;
+                  align-items:center;">
+    GCP IAM Findings
+    <span style="background:#334155;color:#fff;border-radius:9999px;
+                 padding:2px 10px;font-size:0.8rem;">37</span>
+  </summary>
+  <div style="overflow-x:auto;">
+    <table style="width:100%;border-collapse:collapse;font-family:inherit;">
+      <thead>
+        <tr>
+          <th style="background:#0f172a;color:#fff;padding:8px 12px;font-size:0.78rem;text-transform:uppercase;letter-spacing:0.07em;text-align:left;">Check ID</th>
+          <th style="background:#0f172a;color:#fff;padding:8px 12px;font-size:0.78rem;text-transform:uppercase;letter-spacing:0.07em;text-align:left;">Resource</th>
+          <th style="background:#0f172a;color:#fff;padding:8px 12px;font-size:0.78rem;text-transform:uppercase;letter-spacing:0.07em;text-align:left;">Finding</th>
+          <th style="background:#0f172a;color:#fff;padding:8px 12px;font-size:0.78rem;text-transform:uppercase;letter-spacing:0.07em;text-align:left;">Severity</th>
+          <th style="background:#0f172a;color:#fff;padding:8px 12px;font-size:0.78rem;text-transform:uppercase;letter-spacing:0.07em;text-align:left;">Recommendation</th>
+          <th style="background:#0f172a;color:#fff;padding:8px 12px;font-size:0.78rem;text-transform:uppercase;letter-spacing:0.07em;text-align:left;">NIST Function</th>
+        </tr>
+      </thead>
+      <tbody>
+<tr style="background:#fee2e2;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">GCP-001</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">roles/owner → allUsers</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Public member 'allUsers' is granted 'roles/owner'. This exposes the resource to the entire internet or all Google accounts.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#dc2626;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">CRITICAL</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Remove 'allUsers' and 'allAuthenticatedUsers' from all IAM bindings. Replace with specific user, service-account, or group principals.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr>
+<tr style="background:#fee2e2;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">GCP-001</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">roles/owner → allUsers</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Public member 'allUsers' is granted 'roles/owner'. This exposes the resource to the entire internet or all Google accounts.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#dc2626;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">CRITICAL</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Remove 'allUsers' and 'allAuthenticatedUsers' from all IAM bindings. Replace with specific user, service-account, or group principals.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr>
+<tr style="background:#fee2e2;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">GCP-001</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">roles/owner → allAuthenticatedUsers</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Public member 'allAuthenticatedUsers' is granted 'roles/owner'. This exposes the resource to the entire internet or all Google accounts.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#dc2626;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">CRITICAL</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Remove 'allUsers' and 'allAuthenticatedUsers' from all IAM bindings. Replace with specific user, service-account, or group principals.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr>
+<tr style="background:#fef3c7;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">GCP-002</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">roles/owner → user:developer@company.com</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Human user 'user:developer@company.com' holds the Owner role at project scope. Owner grants unrestricted access to all resources and IAM policies.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#d97706;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">HIGH</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Remove Owner from human users. Grant least-privilege roles such as roles/editor or specific resource roles. Use groups rather than individual accounts for administrative access.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr>
+<tr style="background:#fef3c7;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">GCP-003</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">serviceAccount:test-sa@myproject.iam.gserviceaccount.com / key:key001</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">This service account has a user-managed (exported) key. Exported keys leave GCP's security perimeter and increase credential theft risk.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#d97706;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">HIGH</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Delete the exported key and migrate to Workload Identity Federation. If keys are unavoidable, store them in Secret Manager with rotation enforced.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr>
+<tr style="background:#fef3c7;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">GCP-003</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">serviceAccount:temp-migration-sa@myproject.iam.gserviceaccount.com / key:key002</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">This service account has a user-managed (exported) key. Exported keys leave GCP's security perimeter and increase credential theft risk.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#d97706;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">HIGH</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Delete the exported key and migrate to Workload Identity Federation. If keys are unavoidable, store them in Secret Manager with rotation enforced.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr>
+<tr style="background:#fef3c7;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">GCP-003</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">serviceAccount:db-client@myproject.iam.gserviceaccount.com / key:key003</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">This service account has a user-managed (exported) key. Exported keys leave GCP's security perimeter and increase credential theft risk.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#d97706;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">HIGH</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Delete the exported key and migrate to Workload Identity Federation. If keys are unavoidable, store them in Secret Manager with rotation enforced.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr>
+<tr style="background:#fef3c7;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">GCP-003</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">serviceAccount:legacy-api-sa@myproject.iam.gserviceaccount.com / key:key004</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">This service account has a user-managed (exported) key. Exported keys leave GCP's security perimeter and increase credential theft risk.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#d97706;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">HIGH</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Delete the exported key and migrate to Workload Identity Federation. If keys are unavoidable, store them in Secret Manager with rotation enforced.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr>
+<tr style="background:#fef3c7;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">GCP-003</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">serviceAccount:stale-batch-sa@myproject.iam.gserviceaccount.com / key:key005</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">This service account has a user-managed (exported) key. Exported keys leave GCP's security perimeter and increase credential theft risk.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#d97706;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">HIGH</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Delete the exported key and migrate to Workload Identity Federation. If keys are unavoidable, store them in Secret Manager with rotation enforced.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr>
+<tr style="background:#fef3c7;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">GCP-003</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">serviceAccount:etl-runner@myproject.iam.gserviceaccount.com / key:key006</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">This service account has a user-managed (exported) key. Exported keys leave GCP's security perimeter and increase credential theft risk.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#d97706;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">HIGH</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Delete the exported key and migrate to Workload Identity Federation. If keys are unavoidable, store them in Secret Manager with rotation enforced.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr>
+<tr style="background:#fef3c7;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">GCP-003</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">serviceAccount:monitoring-sa@myproject.iam.gserviceaccount.com / key:key007</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">This service account has a user-managed (exported) key. Exported keys leave GCP's security perimeter and increase credential theft risk.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#d97706;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">HIGH</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Delete the exported key and migrate to Workload Identity Federation. If keys are unavoidable, store them in Secret Manager with rotation enforced.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr>
+<tr style="background:#fef3c7;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">GCP-003</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">serviceAccount:deploy-agent@myproject.iam.gserviceaccount.com / key:key008</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">This service account has a user-managed (exported) key. Exported keys leave GCP's security perimeter and increase credential theft risk.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#d97706;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">HIGH</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Delete the exported key and migrate to Workload Identity Federation. If keys are unavoidable, store them in Secret Manager with rotation enforced.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr>
+<tr style="background:#fef3c7;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">GCP-003</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">serviceAccount:gcs-backup-sa@myproject.iam.gserviceaccount.com / key:key009</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">This service account has a user-managed (exported) key. Exported keys leave GCP's security perimeter and increase credential theft risk.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#d97706;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">HIGH</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Delete the exported key and migrate to Workload Identity Federation. If keys are unavoidable, store them in Secret Manager with rotation enforced.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr>
+<tr style="background:#fef3c7;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">GCP-004</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">serviceAccount:test-sa@myproject.iam.gserviceaccount.com / key:key001</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Service account key has not been rotated in 1048 days (threshold: 90 days). Stale keys increase the blast radius of credential compromise.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#d97706;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">HIGH</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Rotate service account keys at least every 90 days. Prefer Workload Identity Federation to eliminate the need for long-lived keys.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr>
+<tr style="background:#fef3c7;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">GCP-004</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">serviceAccount:temp-migration-sa@myproject.iam.gserviceaccount.com / key:key002</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Service account key has not been rotated in 1154 days (threshold: 90 days). Stale keys increase the blast radius of credential compromise.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#d97706;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">HIGH</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Rotate service account keys at least every 90 days. Prefer Workload Identity Federation to eliminate the need for long-lived keys.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr>
+<tr style="background:#fef3c7;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">GCP-004</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">serviceAccount:db-client@myproject.iam.gserviceaccount.com / key:key003</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Service account key has not been rotated in 916 days (threshold: 90 days). Stale keys increase the blast radius of credential compromise.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#d97706;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">HIGH</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Rotate service account keys at least every 90 days. Prefer Workload Identity Federation to eliminate the need for long-lived keys.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr>
+<tr style="background:#fef3c7;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">GCP-004</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">serviceAccount:legacy-api-sa@myproject.iam.gserviceaccount.com / key:key004</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Service account key has not been rotated in 1118 days (threshold: 90 days). Stale keys increase the blast radius of credential compromise.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#d97706;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">HIGH</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Rotate service account keys at least every 90 days. Prefer Workload Identity Federation to eliminate the need for long-lived keys.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr>
+<tr style="background:#fef3c7;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">GCP-004</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">serviceAccount:stale-batch-sa@myproject.iam.gserviceaccount.com / key:key005</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Service account key has not been rotated in 1321 days (threshold: 90 days). Stale keys increase the blast radius of credential compromise.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#d97706;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">HIGH</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Rotate service account keys at least every 90 days. Prefer Workload Identity Federation to eliminate the need for long-lived keys.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr>
+<tr style="background:#fef3c7;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">GCP-004</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">serviceAccount:etl-runner@myproject.iam.gserviceaccount.com / key:key006</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Service account key has not been rotated in 1368 days (threshold: 90 days). Stale keys increase the blast radius of credential compromise.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#d97706;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">HIGH</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Rotate service account keys at least every 90 days. Prefer Workload Identity Federation to eliminate the need for long-lived keys.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr>
+<tr style="background:#fef3c7;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">GCP-004</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">serviceAccount:monitoring-sa@myproject.iam.gserviceaccount.com / key:key007</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Service account key has not been rotated in 1443 days (threshold: 90 days). Stale keys increase the blast radius of credential compromise.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#d97706;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">HIGH</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Rotate service account keys at least every 90 days. Prefer Workload Identity Federation to eliminate the need for long-lived keys.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr>
+<tr style="background:#fef3c7;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">GCP-004</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">serviceAccount:deploy-agent@myproject.iam.gserviceaccount.com / key:key008</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Service account key has not been rotated in 794 days (threshold: 90 days). Stale keys increase the blast radius of credential compromise.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#d97706;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">HIGH</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Rotate service account keys at least every 90 days. Prefer Workload Identity Federation to eliminate the need for long-lived keys.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr>
+<tr style="background:#fef3c7;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">GCP-004</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">serviceAccount:gcs-backup-sa@myproject.iam.gserviceaccount.com / key:key009</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Service account key has not been rotated in 739 days (threshold: 90 days). Stale keys increase the blast radius of credential compromise.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#d97706;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">HIGH</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Rotate service account keys at least every 90 days. Prefer Workload Identity Federation to eliminate the need for long-lived keys.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr>
+<tr style="background:#fef3c7;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">GCP-007</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">roles/editor → serviceAccount:app-sa@myproject.iam.gserviceaccount.com</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">'serviceAccount:app-sa@myproject.iam.gserviceaccount.com' holds the Editor role at project scope. Editor grants read/write access to most GCP services and violates least-privilege.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#d97706;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">HIGH</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Replace roles/editor with purpose-specific roles (e.g., roles/storage.objectAdmin, roles/cloudsql.editor). Apply roles at the minimum required resource scope.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr>
+<tr style="background:#fef3c7;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">GCP-007</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">roles/editor → user:backend-dev@company.com</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">'user:backend-dev@company.com' holds the Editor role at project scope. Editor grants read/write access to most GCP services and violates least-privilege.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#d97706;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">HIGH</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Replace roles/editor with purpose-specific roles (e.g., roles/storage.objectAdmin, roles/cloudsql.editor). Apply roles at the minimum required resource scope.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr>
+<tr style="background:#fef3c7;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">GCP-007</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">roles/editor → user:intern@company.com</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">'user:intern@company.com' holds the Editor role at project scope. Editor grants read/write access to most GCP services and violates least-privilege.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#d97706;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">HIGH</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Replace roles/editor with purpose-specific roles (e.g., roles/storage.objectAdmin, roles/cloudsql.editor). Apply roles at the minimum required resource scope.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr>
+<tr style="background:#fef3c7;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">GCP-007</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">roles/editor → group:engineering@company.com</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">'group:engineering@company.com' holds the Editor role at project scope. Editor grants read/write access to most GCP services and violates least-privilege.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#d97706;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">HIGH</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Replace roles/editor with purpose-specific roles (e.g., roles/storage.objectAdmin, roles/cloudsql.editor). Apply roles at the minimum required resource scope.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr>
+<tr style="background:#eff6ff;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">GCP-005</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">serviceAccount:test-sa@myproject.iam.gserviceaccount.com</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Service account uses key-based authentication and has no Workload Identity Federation binding configured. Key-based auth requires managing long-lived secrets.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#2563eb;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">MEDIUM</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Configure Workload Identity Federation and remove exported keys. WIF allows workloads to impersonate service accounts without downloading key files.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr>
+<tr style="background:#eff6ff;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">GCP-005</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">serviceAccount:temp-migration-sa@myproject.iam.gserviceaccount.com</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Service account uses key-based authentication and has no Workload Identity Federation binding configured. Key-based auth requires managing long-lived secrets.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#2563eb;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">MEDIUM</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Configure Workload Identity Federation and remove exported keys. WIF allows workloads to impersonate service accounts without downloading key files.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr>
+<tr style="background:#eff6ff;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">GCP-005</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">serviceAccount:db-client@myproject.iam.gserviceaccount.com</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Service account uses key-based authentication and has no Workload Identity Federation binding configured. Key-based auth requires managing long-lived secrets.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#2563eb;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">MEDIUM</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Configure Workload Identity Federation and remove exported keys. WIF allows workloads to impersonate service accounts without downloading key files.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr>
+<tr style="background:#eff6ff;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">GCP-005</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">serviceAccount:legacy-api-sa@myproject.iam.gserviceaccount.com</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Service account uses key-based authentication and has no Workload Identity Federation binding configured. Key-based auth requires managing long-lived secrets.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#2563eb;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">MEDIUM</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Configure Workload Identity Federation and remove exported keys. WIF allows workloads to impersonate service accounts without downloading key files.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr>
+<tr style="background:#eff6ff;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">GCP-005</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">serviceAccount:stale-batch-sa@myproject.iam.gserviceaccount.com</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Service account uses key-based authentication and has no Workload Identity Federation binding configured. Key-based auth requires managing long-lived secrets.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#2563eb;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">MEDIUM</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Configure Workload Identity Federation and remove exported keys. WIF allows workloads to impersonate service accounts without downloading key files.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr>
+<tr style="background:#eff6ff;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">GCP-005</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">serviceAccount:etl-runner@myproject.iam.gserviceaccount.com</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Service account uses key-based authentication and has no Workload Identity Federation binding configured. Key-based auth requires managing long-lived secrets.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#2563eb;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">MEDIUM</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Configure Workload Identity Federation and remove exported keys. WIF allows workloads to impersonate service accounts without downloading key files.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr>
+<tr style="background:#eff6ff;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">GCP-005</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">serviceAccount:monitoring-sa@myproject.iam.gserviceaccount.com</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Service account uses key-based authentication and has no Workload Identity Federation binding configured. Key-based auth requires managing long-lived secrets.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#2563eb;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">MEDIUM</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Configure Workload Identity Federation and remove exported keys. WIF allows workloads to impersonate service accounts without downloading key files.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr>
+<tr style="background:#eff6ff;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">GCP-005</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">serviceAccount:deploy-agent@myproject.iam.gserviceaccount.com</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Service account uses key-based authentication and has no Workload Identity Federation binding configured. Key-based auth requires managing long-lived secrets.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#2563eb;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">MEDIUM</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Configure Workload Identity Federation and remove exported keys. WIF allows workloads to impersonate service accounts without downloading key files.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr>
+<tr style="background:#eff6ff;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">GCP-005</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">serviceAccount:gcs-backup-sa@myproject.iam.gserviceaccount.com</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Service account uses key-based authentication and has no Workload Identity Federation binding configured. Key-based auth requires managing long-lived secrets.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#2563eb;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">MEDIUM</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Configure Workload Identity Federation and remove exported keys. WIF allows workloads to impersonate service accounts without downloading key files.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr>
+<tr style="background:#eff6ff;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">GCP-006</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">serviceAccount:test-sa@myproject.iam.gserviceaccount.com</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Service account 'test-sa@myproject.iam.gserviceaccount.com' (display: 'test account for integration testing') has test/temporary naming conventions suggesting it was created for development or testing and should not exist in a production environment.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#2563eb;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">MEDIUM</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Audit test and temporary service accounts. Delete or disable those not required in production. Enforce a naming policy to prevent test accounts entering prod.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    IDENTIFY</td>
+</tr>
+<tr style="background:#eff6ff;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">GCP-006</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">serviceAccount:temp-migration-sa@myproject.iam.gserviceaccount.com</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Service account 'temp-migration-sa@myproject.iam.gserviceaccount.com' (display: 'temp migration helper') has test/temporary naming conventions suggesting it was created for development or testing and should not exist in a production environment.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#2563eb;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">MEDIUM</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Audit test and temporary service accounts. Delete or disable those not required in production. Enforce a naming policy to prevent test accounts entering prod.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    IDENTIFY</td>
+</tr></tbody>
+    </table>
+  </div>
+</details>
+
+<details style="border:1px solid #e2e8f0;border-radius:10px;
+                margin-bottom:16px;overflow:hidden;">
+  <summary style="background:#f8fafc;padding:18px 24px;cursor:pointer;
+                  font-weight:700;font-size:1rem;color:#0f172a;
+                  list-style:none;display:flex;justify-content:space-between;
+                  align-items:center;">
+    Container Security Findings
+    <span style="background:#334155;color:#fff;border-radius:9999px;
+                 padding:2px 10px;font-size:0.8rem;">33</span>
+  </summary>
+  <div style="overflow-x:auto;">
+    <table style="width:100%;border-collapse:collapse;font-family:inherit;">
+      <thead>
+        <tr>
+          <th style="background:#0f172a;color:#fff;padding:8px 12px;font-size:0.78rem;text-transform:uppercase;letter-spacing:0.07em;text-align:left;">Check ID</th>
+          <th style="background:#0f172a;color:#fff;padding:8px 12px;font-size:0.78rem;text-transform:uppercase;letter-spacing:0.07em;text-align:left;">Resource</th>
+          <th style="background:#0f172a;color:#fff;padding:8px 12px;font-size:0.78rem;text-transform:uppercase;letter-spacing:0.07em;text-align:left;">Finding</th>
+          <th style="background:#0f172a;color:#fff;padding:8px 12px;font-size:0.78rem;text-transform:uppercase;letter-spacing:0.07em;text-align:left;">Severity</th>
+          <th style="background:#0f172a;color:#fff;padding:8px 12px;font-size:0.78rem;text-transform:uppercase;letter-spacing:0.07em;text-align:left;">Recommendation</th>
+          <th style="background:#0f172a;color:#fff;padding:8px 12px;font-size:0.78rem;text-transform:uppercase;letter-spacing:0.07em;text-align:left;">NIST Function</th>
+        </tr>
+      </thead>
+      <tbody>
+<tr style="background:#fee2e2;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">CONTAINER-001</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">docker-compose/service:admin-tools</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Service 'admin-tools' runs as a privileged container (privileged: true). Privileged mode grants full host access.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#dc2626;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">CRITICAL</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Remove 'privileged: true'. Use specific Linux capabilities (cap_add) for only what is needed. Prefer rootless containers and AppArmor/seccomp profiles.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr>
+<tr style="background:#fee2e2;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">CONTAINER-002</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">docker-compose/service:network-utils</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Service 'network-utils' uses host network mode. This bypasses container network isolation.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#dc2626;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">CRITICAL</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Remove 'network_mode: host'. Use bridge networking with explicit port mappings instead.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr>
+<tr style="background:#fee2e2;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">CONTAINER-004</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">docker-compose/service:admin-tools/volume:/etc/passwd:/etc/passwd:ro</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Service 'admin-tools' mounts host path '/etc/passwd' into the container. This path is sensitive and may expose system files.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#dc2626;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">CRITICAL</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Replace host path mounts with named Docker volumes. For system-level access, evaluate whether it is strictly necessary and apply read-only mounts where possible.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr>
+<tr style="background:#fee2e2;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">CONTAINER-001</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">k8s/Deployment:vulnerable-app/container:sidecar-agent</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Container 'sidecar-agent' in Deployment 'vulnerable-app' is privileged. Privileged K8s containers can escape to the host.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#dc2626;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">CRITICAL</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Set 'securityContext.privileged: false'. Use specific capabilities (capabilities.add) for only what is required.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr>
+<tr style="background:#fee2e2;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">CONTAINER-002</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">k8s/Deployment:vulnerable-app</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Deployment 'vulnerable-app' has hostNetwork: true. Pods share the host network namespace, bypassing network isolation.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#dc2626;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">CRITICAL</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Set 'hostNetwork: false' or remove the field. Use ClusterIP services and ingress controllers instead of direct host networking.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr>
+<tr style="background:#fef3c7;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">CONTAINER-003</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">docker-compose/service:admin-tools/env:ADMIN_TOKEN</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Service 'admin-tools' has a potential hardcoded secret in environment variable 'ADMIN_TOKEN'.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#d97706;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">HIGH</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Remove hardcoded credentials from docker-compose files. Use Docker Secrets, environment variable files (.env), or a secret manager (e.g., Vault, AWS Secrets Manager).</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr>
+<tr style="background:#fef3c7;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">CONTAINER-003</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">docker-compose/service:postgres/env:POSTGRES_PASSWORD</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Service 'postgres' has a potential hardcoded secret in environment variable 'POSTGRES_PASSWORD'.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#d97706;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">HIGH</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Remove hardcoded credentials from docker-compose files. Use Docker Secrets, environment variable files (.env), or a secret manager (e.g., Vault, AWS Secrets Manager).</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr>
+<tr style="background:#fef3c7;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">CONTAINER-003</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">docker-compose/service:api-service/env:API_KEY</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Service 'api-service' has a potential hardcoded secret in environment variable 'API_KEY'.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#d97706;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">HIGH</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Remove hardcoded credentials from docker-compose files. Use Docker Secrets, environment variable files (.env), or a secret manager (e.g., Vault, AWS Secrets Manager).</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr>
+<tr style="background:#fef3c7;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">CONTAINER-003</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">docker-compose/service:api-service/env:DB_PASSWORD</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Service 'api-service' has a potential hardcoded secret in environment variable 'DB_PASSWORD'.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#d97706;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">HIGH</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Remove hardcoded credentials from docker-compose files. Use Docker Secrets, environment variable files (.env), or a secret manager (e.g., Vault, AWS Secrets Manager).</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr>
+<tr style="background:#fef3c7;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">CONTAINER-003</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">docker-compose/service:api-service/env:JWT_SECRET</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Service 'api-service' has a potential hardcoded secret in environment variable 'JWT_SECRET'.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#d97706;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">HIGH</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Remove hardcoded credentials from docker-compose files. Use Docker Secrets, environment variable files (.env), or a secret manager (e.g., Vault, AWS Secrets Manager).</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr>
+<tr style="background:#fef3c7;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">CONTAINER-006</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">docker-compose/service:admin-tools</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Service 'admin-tools' has no 'user' directive. Containers run as root (UID 0) by default.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#d97706;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">HIGH</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Add 'user: &quot;&lt;uid&gt;:&lt;gid&gt;&quot;' to the service definition. Use a non-root UID (e.g., 1000:1000). Ensure the base image supports running as non-root.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr>
+<tr style="background:#fef3c7;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">CONTAINER-006</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">docker-compose/service:network-utils</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Service 'network-utils' has no 'user' directive. Containers run as root (UID 0) by default.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#d97706;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">HIGH</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Add 'user: &quot;&lt;uid&gt;:&lt;gid&gt;&quot;' to the service definition. Use a non-root UID (e.g., 1000:1000). Ensure the base image supports running as non-root.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr>
+<tr style="background:#fef3c7;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">CONTAINER-006</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">docker-compose/service:postgres</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Service 'postgres' has no 'user' directive. Containers run as root (UID 0) by default.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#d97706;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">HIGH</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Add 'user: &quot;&lt;uid&gt;:&lt;gid&gt;&quot;' to the service definition. Use a non-root UID (e.g., 1000:1000). Ensure the base image supports running as non-root.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr>
+<tr style="background:#fef3c7;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">CONTAINER-006</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">docker-compose/service:api-service</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Service 'api-service' has no 'user' directive. Containers run as root (UID 0) by default.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#d97706;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">HIGH</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Add 'user: &quot;&lt;uid&gt;:&lt;gid&gt;&quot;' to the service definition. Use a non-root UID (e.g., 1000:1000). Ensure the base image supports running as non-root.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr>
+<tr style="background:#fef3c7;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">CONTAINER-006</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">docker-compose/service:web-proxy</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Service 'web-proxy' has no 'user' directive. Containers run as root (UID 0) by default.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#d97706;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">HIGH</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Add 'user: &quot;&lt;uid&gt;:&lt;gid&gt;&quot;' to the service definition. Use a non-root UID (e.g., 1000:1000). Ensure the base image supports running as non-root.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr>
+<tr style="background:#fef3c7;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">CONTAINER-003</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">k8s/Deployment:vulnerable-app/container:main-app/env:DB_PASSWORD</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Container 'main-app' has a potential hardcoded secret in env var 'DB_PASSWORD'.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#d97706;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">HIGH</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Use Kubernetes Secrets with secretKeyRef or a secrets manager (e.g., Vault, AWS Secrets Manager with CSI driver). Never store credentials as plaintext in manifests.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr>
+<tr style="background:#fef3c7;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">CONTAINER-003</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">k8s/Deployment:vulnerable-app/container:main-app/env:API_KEY</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Container 'main-app' has a potential hardcoded secret in env var 'API_KEY'.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#d97706;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">HIGH</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Use Kubernetes Secrets with secretKeyRef or a secrets manager (e.g., Vault, AWS Secrets Manager with CSI driver). Never store credentials as plaintext in manifests.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr>
+<tr style="background:#fef3c7;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">CONTAINER-003</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">k8s/Deployment:vulnerable-app/container:main-app/env:JWT_SECRET</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Container 'main-app' has a potential hardcoded secret in env var 'JWT_SECRET'.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#d97706;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">HIGH</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Use Kubernetes Secrets with secretKeyRef or a secrets manager (e.g., Vault, AWS Secrets Manager with CSI driver). Never store credentials as plaintext in manifests.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr>
+<tr style="background:#fef3c7;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">CONTAINER-003</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">k8s/Deployment:vulnerable-app/container:sidecar-agent/env:DD_API_KEY</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Container 'sidecar-agent' has a potential hardcoded secret in env var 'DD_API_KEY'.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#d97706;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">HIGH</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Use Kubernetes Secrets with secretKeyRef or a secrets manager (e.g., Vault, AWS Secrets Manager with CSI driver). Never store credentials as plaintext in manifests.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr>
+<tr style="background:#fef3c7;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">CONTAINER-005</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">k8s/Deployment:vulnerable-app/container:main-app</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Container 'main-app' in Deployment 'vulnerable-app' has no securityContext. Container will inherit permissive defaults.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#d97706;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">HIGH</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Define a securityContext with at minimum: allowPrivilegeEscalation: false, readOnlyRootFilesystem: true, runAsNonRoot: true, and capabilities.drop: [ALL].</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr>
+<tr style="background:#fef3c7;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">CONTAINER-005</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">k8s/Deployment:vulnerable-app/container:log-forwarder</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Container 'log-forwarder' in Deployment 'vulnerable-app' has no securityContext. Container will inherit permissive defaults.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#d97706;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">HIGH</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Define a securityContext with at minimum: allowPrivilegeEscalation: false, readOnlyRootFilesystem: true, runAsNonRoot: true, and capabilities.drop: [ALL].</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr>
+<tr style="background:#fef3c7;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">CONTAINER-006</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">k8s/Deployment:vulnerable-app/container:sidecar-agent</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Container 'sidecar-agent' in Deployment 'vulnerable-app' explicitly sets runAsUser: 0 (root). Root containers can escalate to host.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#d97706;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">HIGH</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Set runAsUser to a non-zero UID (e.g., 1000). Add runAsNonRoot: true to the pod securityContext as an additional guard.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr>
+<tr style="background:#fef3c7;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">CONTAINER-009</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">k8s/ClusterRoleBinding:app-admin-binding/subject:app-service-account</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">ClusterRoleBinding 'app-admin-binding' grants 'cluster-admin' to 'ServiceAccount:app-service-account'. This provides cluster-wide privileged access.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#d97706;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">HIGH</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Replace cluster-admin with narrowly scoped Roles and RoleBindings limited to specific namespaces and verbs. Apply least-privilege RBAC using the principle of minimal required access.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr>
+<tr style="background:#fef3c7;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">CONTAINER-010</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">k8s/ServiceAccount:default/app-service-account</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">ServiceAccount 'default/app-service-account' has automountServiceAccountToken: true and is bound to a broad RBAC role. Any pod using this SA automatically receives a high-privilege token.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#d97706;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">HIGH</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Set 'automountServiceAccountToken: false' on the ServiceAccount and opt-in per-pod only where required. Restrict the bound role to minimal required permissions.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr>
+<tr style="background:#eff6ff;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">CONTAINER-007</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">docker-compose/service:admin-tools/image:busybox:latest</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Service 'admin-tools' uses unpinned image tag 'busybox:latest'. :latest is mutable and may pull a different image silently.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#2563eb;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">MEDIUM</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Pin images to an immutable digest: 'image: myimage:v1.2.3@sha256:&lt;digest&gt;'. Use image scanning in CI/CD to validate pinned images.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr>
+<tr style="background:#eff6ff;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">CONTAINER-007</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">docker-compose/service:network-utils/image:nicolaka/netshoot:latest</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Service 'network-utils' uses unpinned image tag 'nicolaka/netshoot:latest'. :latest is mutable and may pull a different image silently.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#2563eb;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">MEDIUM</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Pin images to an immutable digest: 'image: myimage:v1.2.3@sha256:&lt;digest&gt;'. Use image scanning in CI/CD to validate pinned images.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr>
+<tr style="background:#eff6ff;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">CONTAINER-007</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">docker-compose/service:web-proxy/image:nginx:latest</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Service 'web-proxy' uses unpinned image tag 'nginx:latest'. :latest is mutable and may pull a different image silently.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#2563eb;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">MEDIUM</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Pin images to an immutable digest: 'image: myimage:v1.2.3@sha256:&lt;digest&gt;'. Use image scanning in CI/CD to validate pinned images.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr>
+<tr style="background:#eff6ff;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">CONTAINER-004</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">k8s/Deployment:vulnerable-app/volume:varlog</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Deployment 'vulnerable-app' mounts host path '/var/log' via hostPath volume. This grants container access to host filesystem data.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#2563eb;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">MEDIUM</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Replace hostPath volumes with PersistentVolumeClaims backed by a storage class. For log access use sidecar log-forwarder patterns.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr>
+<tr style="background:#eff6ff;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">CONTAINER-007</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">k8s/Deployment:vulnerable-app/container:main-app/image:myapp:latest</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Container 'main-app' uses unpinned image 'myapp:latest'. Mutable tags can lead to unintended image upgrades.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#2563eb;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">MEDIUM</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Pin images to a SHA256 digest: 'image: myimage:v1.2.3@sha256:&lt;hash&gt;'. Enforce digest pinning via admission controller or OPA policy.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr>
+<tr style="background:#eff6ff;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">CONTAINER-007</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">k8s/Deployment:vulnerable-app/container:sidecar-agent/image:datadog/agent:latest</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Container 'sidecar-agent' uses unpinned image 'datadog/agent:latest'. Mutable tags can lead to unintended image upgrades.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#2563eb;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">MEDIUM</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Pin images to a SHA256 digest: 'image: myimage:v1.2.3@sha256:&lt;hash&gt;'. Enforce digest pinning via admission controller or OPA policy.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr>
+<tr style="background:#eff6ff;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">CONTAINER-008</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">k8s/Deployment:vulnerable-app/container:main-app</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Container 'main-app' in Deployment 'vulnerable-app' is missing CPU and/or memory resource limits. Unbounded containers risk resource exhaustion (DoS).</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#2563eb;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">MEDIUM</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Define both 'resources.limits.cpu' and 'resources.limits.memory'. Also set 'resources.requests' to aid scheduler placement. Consider LimitRange objects to enforce defaults cluster-wide.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr>
+<tr style="background:#eff6ff;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">CONTAINER-008</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">k8s/Deployment:vulnerable-app/container:sidecar-agent</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Container 'sidecar-agent' in Deployment 'vulnerable-app' is missing CPU and/or memory resource limits. Unbounded containers risk resource exhaustion (DoS).</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#2563eb;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">MEDIUM</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Define both 'resources.limits.cpu' and 'resources.limits.memory'. Also set 'resources.requests' to aid scheduler placement. Consider LimitRange objects to enforce defaults cluster-wide.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr>
+<tr style="background:#eff6ff;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">CONTAINER-008</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">k8s/Deployment:vulnerable-app/container:log-forwarder</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Container 'log-forwarder' in Deployment 'vulnerable-app' is missing CPU and/or memory resource limits. Unbounded containers risk resource exhaustion (DoS).</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#2563eb;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">MEDIUM</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Define both 'resources.limits.cpu' and 'resources.limits.memory'. Also set 'resources.requests' to aid scheduler placement. Consider LimitRange objects to enforce defaults cluster-wide.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr></tbody>
+    </table>
+  </div>
+</details>
+
+<details style="border:1px solid #e2e8f0;border-radius:10px;
+                margin-bottom:16px;overflow:hidden;">
+  <summary style="background:#f8fafc;padding:18px 24px;cursor:pointer;
+                  font-weight:700;font-size:1rem;color:#0f172a;
+                  list-style:none;display:flex;justify-content:space-between;
+                  align-items:center;">
+    CI/CD Pipeline Findings
+    <span style="background:#334155;color:#fff;border-radius:9999px;
+                 padding:2px 10px;font-size:0.8rem;">14</span>
+  </summary>
+  <div style="overflow-x:auto;">
+    <table style="width:100%;border-collapse:collapse;font-family:inherit;">
+      <thead>
+        <tr>
+          <th style="background:#0f172a;color:#fff;padding:8px 12px;font-size:0.78rem;text-transform:uppercase;letter-spacing:0.07em;text-align:left;">Check ID</th>
+          <th style="background:#0f172a;color:#fff;padding:8px 12px;font-size:0.78rem;text-transform:uppercase;letter-spacing:0.07em;text-align:left;">Resource</th>
+          <th style="background:#0f172a;color:#fff;padding:8px 12px;font-size:0.78rem;text-transform:uppercase;letter-spacing:0.07em;text-align:left;">Finding</th>
+          <th style="background:#0f172a;color:#fff;padding:8px 12px;font-size:0.78rem;text-transform:uppercase;letter-spacing:0.07em;text-align:left;">Severity</th>
+          <th style="background:#0f172a;color:#fff;padding:8px 12px;font-size:0.78rem;text-transform:uppercase;letter-spacing:0.07em;text-align:left;">Recommendation</th>
+          <th style="background:#0f172a;color:#fff;padding:8px 12px;font-size:0.78rem;text-transform:uppercase;letter-spacing:0.07em;text-align:left;">NIST Function</th>
+        </tr>
+      </thead>
+      <tbody>
+<tr style="background:#fee2e2;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">CICD-003</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">job:build/step:Debug API credentials</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Step 'Debug API credentials' echoes a secret to the runner log. Even with log masking, secrets may leak via encoding tricks.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#dc2626;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">CRITICAL</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Remove debug echo statements referencing ${{ secrets.* }}. Use '::add-mask::' only for dynamic values if absolutely needed.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    DETECT</td>
+</tr>
+<tr style="background:#fee2e2;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">CICD-003</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">job:docker-build/step:Login to Docker Hub</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Step 'Login to Docker Hub' echoes a secret to the runner log. Even with log masking, secrets may leak via encoding tricks.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#dc2626;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">CRITICAL</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Remove debug echo statements referencing ${{ secrets.* }}. Use '::add-mask::' only for dynamic values if absolutely needed.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    DETECT</td>
+</tr>
+<tr style="background:#fee2e2;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">CICD-003</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">job:deploy/step:Configure kubectl</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Step 'Configure kubectl' echoes a secret to the runner log. Even with log masking, secrets may leak via encoding tricks.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#dc2626;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">CRITICAL</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Remove debug echo statements referencing ${{ secrets.* }}. Use '::add-mask::' only for dynamic values if absolutely needed.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    DETECT</td>
+</tr>
+<tr style="background:#fef3c7;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">CICD-001</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">workflow:permissions</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Workflow permissions set to 'write-all'. Grants write access to all repository scopes.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#d97706;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">HIGH</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Replace 'permissions: write-all' with explicit minimal permissions per-job.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr>
+<tr style="background:#fef3c7;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">CICD-002</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">job:build/step:Checkout code</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Action 'actions/checkout@v2' is not pinned to a full commit SHA. Tags are mutable and can be updated to malicious commits (supply-chain attack vector).</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#d97706;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">HIGH</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Pin to a full SHA: 'uses: actions/checkout@&lt;40-char-sha&gt;'. Use Dependabot or pin-github-action to automate pinning.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr>
+<tr style="background:#fef3c7;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">CICD-002</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">job:build/step:Setup Node</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Action 'actions/setup-node@v3' is not pinned to a full commit SHA. Tags are mutable and can be updated to malicious commits (supply-chain attack vector).</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#d97706;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">HIGH</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Pin to a full SHA: 'uses: actions/setup-node@&lt;40-char-sha&gt;'. Use Dependabot or pin-github-action to automate pinning.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr>
+<tr style="background:#fef3c7;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">CICD-002</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">job:build/step:Upload coverage</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Action 'codecov/codecov-action@v1' is not pinned to a full commit SHA. Tags are mutable and can be updated to malicious commits (supply-chain attack vector).</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#d97706;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">HIGH</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Pin to a full SHA: 'uses: codecov/codecov-action@&lt;40-char-sha&gt;'. Use Dependabot or pin-github-action to automate pinning.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr>
+<tr style="background:#fef3c7;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">CICD-002</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">job:docker-build/step:actions/checkout@v2</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Action 'actions/checkout@v2' is not pinned to a full commit SHA. Tags are mutable and can be updated to malicious commits (supply-chain attack vector).</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#d97706;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">HIGH</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Pin to a full SHA: 'uses: actions/checkout@&lt;40-char-sha&gt;'. Use Dependabot or pin-github-action to automate pinning.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr>
+<tr style="background:#fef3c7;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">CICD-002</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">job:deploy/step:actions/checkout@v2</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Action 'actions/checkout@v2' is not pinned to a full commit SHA. Tags are mutable and can be updated to malicious commits (supply-chain attack vector).</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#d97706;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">HIGH</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Pin to a full SHA: 'uses: actions/checkout@&lt;40-char-sha&gt;'. Use Dependabot or pin-github-action to automate pinning.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr>
+<tr style="background:#eff6ff;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">CICD-005</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">workflow/env:ACTIONS_RUNNER_DEBUG</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Debug flag 'ACTIONS_RUNNER_DEBUG' is permanently enabled. Debug mode may dump environment variables and secret values to the run log.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#2563eb;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">MEDIUM</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Remove 'ACTIONS_RUNNER_DEBUG' from the YAML. Enable via repository secret on a per-run basis.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    DETECT</td>
+</tr>
+<tr style="background:#eff6ff;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">CICD-005</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">workflow/env:ACTIONS_STEP_DEBUG</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Debug flag 'ACTIONS_STEP_DEBUG' is permanently enabled. Debug mode may dump environment variables and secret values to the run log.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#2563eb;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">MEDIUM</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Remove 'ACTIONS_STEP_DEBUG' from the YAML. Enable via repository secret on a per-run basis.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    DETECT</td>
+</tr>
+<tr style="background:#f0fdf4;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">CICD-006</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">job:build</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Job 'build' has no 'timeout-minutes'. A hung job consumes runner minutes until GitHub's 6-hour default — a cost/resource risk.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#16a34a;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">LOW</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Add 'timeout-minutes: &lt;N&gt;' to each job. Most jobs should complete in &lt; 30 min.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr>
+<tr style="background:#f0fdf4;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">CICD-006</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">job:docker-build</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Job 'docker-build' has no 'timeout-minutes'. A hung job consumes runner minutes until GitHub's 6-hour default — a cost/resource risk.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#16a34a;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">LOW</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Add 'timeout-minutes: &lt;N&gt;' to each job. Most jobs should complete in &lt; 30 min.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr>
+<tr style="background:#f0fdf4;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">CICD-006</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">job:deploy</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Job 'deploy' has no 'timeout-minutes'. A hung job consumes runner minutes until GitHub's 6-hour default — a cost/resource risk.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#16a34a;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">LOW</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Add 'timeout-minutes: &lt;N&gt;' to each job. Most jobs should complete in &lt; 30 min.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr></tbody>
+    </table>
+  </div>
+</details>
+
+<details style="border:1px solid #e2e8f0;border-radius:10px;
+                margin-bottom:16px;overflow:hidden;">
+  <summary style="background:#f8fafc;padding:18px 24px;cursor:pointer;
+                  font-weight:700;font-size:1rem;color:#0f172a;
+                  list-style:none;display:flex;justify-content:space-between;
+                  align-items:center;">
+    Terraform Findings
+    <span style="background:#334155;color:#fff;border-radius:9999px;
+                 padding:2px 10px;font-size:0.8rem;">13</span>
+  </summary>
+  <div style="overflow-x:auto;">
+    <table style="width:100%;border-collapse:collapse;font-family:inherit;">
+      <thead>
+        <tr>
+          <th style="background:#0f172a;color:#fff;padding:8px 12px;font-size:0.78rem;text-transform:uppercase;letter-spacing:0.07em;text-align:left;">Check ID</th>
+          <th style="background:#0f172a;color:#fff;padding:8px 12px;font-size:0.78rem;text-transform:uppercase;letter-spacing:0.07em;text-align:left;">Resource</th>
+          <th style="background:#0f172a;color:#fff;padding:8px 12px;font-size:0.78rem;text-transform:uppercase;letter-spacing:0.07em;text-align:left;">Finding</th>
+          <th style="background:#0f172a;color:#fff;padding:8px 12px;font-size:0.78rem;text-transform:uppercase;letter-spacing:0.07em;text-align:left;">Severity</th>
+          <th style="background:#0f172a;color:#fff;padding:8px 12px;font-size:0.78rem;text-transform:uppercase;letter-spacing:0.07em;text-align:left;">Recommendation</th>
+          <th style="background:#0f172a;color:#fff;padding:8px 12px;font-size:0.78rem;text-transform:uppercase;letter-spacing:0.07em;text-align:left;">NIST Function</th>
+        </tr>
+      </thead>
+      <tbody>
+<tr style="background:#fee2e2;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">TF-001</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">google_project_iam_binding.public_owner</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">IAM binding grants 'roles/owner' to public member 'allUsers'. This exposes your project to the entire internet or all Google accounts.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#dc2626;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">CRITICAL</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Remove 'allUsers' and 'allAuthenticatedUsers' from all IAM bindings. Replace with specific principals (user:, serviceAccount:, group:).</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr>
+<tr style="background:#fee2e2;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">TF-001</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">google_project_iam_binding.public_owner</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">IAM binding grants 'roles/owner' to public member 'allAuthenticatedUsers'. This exposes your project to the entire internet or all Google accounts.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#dc2626;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">CRITICAL</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Remove 'allUsers' and 'allAuthenticatedUsers' from all IAM bindings. Replace with specific principals (user:, serviceAccount:, group:).</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr>
+<tr style="background:#fee2e2;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">TF-003</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">google_compute_firewall.allow_all_ingress</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Firewall rule 'allow_all_ingress' allows all TCP ports from 0.0.0.0/0 (the entire internet). This creates a very large attack surface.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#dc2626;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">CRITICAL</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Restrict source_ranges to known IP ranges and limit allowed ports to only those required. Use firewall tags and VPC Service Controls to reduce scope.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr>
+<tr style="background:#fee2e2;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">TF-008</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">google_project_iam_binding.public_owner → allUsers</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Principal 'allUsers' is granted 'roles/owner' at project scope. Owner grants unrestricted access to GCP resources.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#dc2626;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">CRITICAL</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Replace 'roles/owner' with purpose-specific predefined or custom roles. Apply at the minimum necessary resource scope (not project-wide).</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr>
+<tr style="background:#fee2e2;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">TF-008</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">google_project_iam_binding.public_owner → allAuthenticatedUsers</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Principal 'allAuthenticatedUsers' is granted 'roles/owner' at project scope. Owner grants unrestricted access to GCP resources.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#dc2626;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">CRITICAL</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Replace 'roles/owner' with purpose-specific predefined or custom roles. Apply at the minimum necessary resource scope (not project-wide).</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr>
+<tr style="background:#fef3c7;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">TF-002</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">google_service_account_key.deploy_sa_key</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Terraform creates an exported service account key. Key material leaves GCP's security perimeter and is stored in Terraform state (often plaintext).</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#d97706;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">HIGH</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Delete the google_service_account_key resource and migrate to Workload Identity Federation. If keys are unavoidable, store in Secret Manager with rotation.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr>
+<tr style="background:#fef3c7;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">TF-004</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">google_storage_bucket.app_data</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Bucket 'app_data' has uniform_bucket_level_access disabled. Object-level ACLs can bypass bucket IAM policies, leading to over-permissive access.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#d97706;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">HIGH</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Set 'uniform_bucket_level_access = true'. Migrate any object ACLs to bucket-level IAM policies beforehand.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr>
+<tr style="background:#fef3c7;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">TF-006</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">google_compute_instance.app_server</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Instance 'app_server' uses the 'cloud-platform' scope, which grants the instance's service account access to all Google Cloud APIs.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#d97706;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">HIGH</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Replace 'cloud-platform' with specific API scopes (e.g., 'storage.read_only', 'logging.write'). Apply least privilege at both the scope and IAM role level.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr>
+<tr style="background:#fef3c7;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">TF-008</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">google_project_iam_binding.broad_editor → user:developer@company.com</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Principal 'user:developer@company.com' is granted 'roles/editor' at project scope. Editor grants unrestricted access to GCP resources.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#d97706;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">HIGH</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Replace 'roles/editor' with purpose-specific predefined or custom roles. Apply at the minimum necessary resource scope (not project-wide).</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr>
+<tr style="background:#fef3c7;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">TF-008</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">google_project_iam_binding.broad_editor → user:contractor@external.com</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Principal 'user:contractor@external.com' is granted 'roles/editor' at project scope. Editor grants unrestricted access to GCP resources.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#d97706;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">HIGH</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Replace 'roles/editor' with purpose-specific predefined or custom roles. Apply at the minimum necessary resource scope (not project-wide).</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr>
+<tr style="background:#fef3c7;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">TF-008</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">google_project_iam_binding.broad_editor → group:engineering@company.com</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Principal 'group:engineering@company.com' is granted 'roles/editor' at project scope. Editor grants unrestricted access to GCP resources.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#d97706;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">HIGH</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Replace 'roles/editor' with purpose-specific predefined or custom roles. Apply at the minimum necessary resource scope (not project-wide).</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr>
+<tr style="background:#eff6ff;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">TF-005</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">google_compute_instance.app_server</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Instance 'app_server' has OS Login disabled (enable-oslogin = false). Without OS Login, SSH access falls back to project/instance SSH keys which are harder to audit and revoke.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#2563eb;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">MEDIUM</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Set 'enable-oslogin = &quot;true&quot;' in the instance metadata block. OS Login integrates with Cloud IAM for centralized SSH key management.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    PROTECT</td>
+</tr>
+<tr style="background:#eff6ff;">
+  <td style="padding:8px 12px;font-size:0.82rem;font-weight:600;
+             white-space:nowrap;">TF-007</td>
+  <td style="padding:8px 12px;font-size:0.82rem;max-width:180px;
+             word-break:break-word;">google_storage_bucket.app_data</td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Bucket 'app_data' does not have versioning enabled. Accidental or malicious deletions/overwrites cannot be recovered.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;"><span style="background:#2563eb;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">MEDIUM</span></td>
+  <td style="padding:8px 12px;font-size:0.82rem;">Add 'versioning { enabled = true }' to the bucket. Combine with Object Lifecycle rules to manage storage costs.</td>
+  <td style="padding:8px 12px;font-size:0.82rem;
+             white-space:nowrap;font-weight:600;color:#475569;">
+    RECOVER</td>
+</tr></tbody>
+    </table>
+  </div>
+</details>
+
+</section>
+
+<section style="background:#fff;border:1px solid #e2e8f0;border-radius:10px;
+                padding:32px 36px;margin-bottom:28px;">
+  <h2 style="margin:0 0 4px;font-size:1.3rem;font-weight:700;color:#0f172a;">
+    GCP IAM Controls Evaluated — Google Cloud Security Engineer Alignment
+  </h2>
+  <p style="margin:0 0 20px;font-size:0.87rem;color:#64748b;">
+    Aligned with GCP Security Command Center findings and Google Cloud Security Foundations blueprint
+  </p>
+  
+<div style="display:flex;gap:12px;padding:12px 0;
+            border-bottom:1px solid #f1f5f9;">
+  <span style="font-weight:700;color:#475569;min-width:26px;">1.</span>
+  <div>
+    <span style="font-weight:700;color:#0f172a;font-family:monospace;
+                 font-size:0.9rem;">GCP-001</span>
+    <span style="color:#334155;margin-left:8px;font-size:0.9rem;">allUsers / allAuthenticatedUsers IAM bindings (roles/owner or any)</span>
+  </div>
+</div>
+<div style="display:flex;gap:12px;padding:12px 0;
+            border-bottom:1px solid #f1f5f9;">
+  <span style="font-weight:700;color:#475569;min-width:26px;">2.</span>
+  <div>
+    <span style="font-weight:700;color:#0f172a;font-family:monospace;
+                 font-size:0.9rem;">GCP-002</span>
+    <span style="color:#334155;margin-left:8px;font-size:0.9rem;">Human users assigned Owner role at project level</span>
+  </div>
+</div>
+<div style="display:flex;gap:12px;padding:12px 0;
+            border-bottom:1px solid #f1f5f9;">
+  <span style="font-weight:700;color:#475569;min-width:26px;">3.</span>
+  <div>
+    <span style="font-weight:700;color:#0f172a;font-family:monospace;
+                 font-size:0.9rem;">GCP-003</span>
+    <span style="color:#334155;margin-left:8px;font-size:0.9rem;">Exported user-managed service account keys</span>
+  </div>
+</div>
+<div style="display:flex;gap:12px;padding:12px 0;
+            border-bottom:1px solid #f1f5f9;">
+  <span style="font-weight:700;color:#475569;min-width:26px;">4.</span>
+  <div>
+    <span style="font-weight:700;color:#0f172a;font-family:monospace;
+                 font-size:0.9rem;">GCP-004</span>
+    <span style="color:#334155;margin-left:8px;font-size:0.9rem;">Service account keys not rotated in &gt;90 days</span>
+  </div>
+</div>
+<div style="display:flex;gap:12px;padding:12px 0;
+            border-bottom:1px solid #f1f5f9;">
+  <span style="font-weight:700;color:#475569;min-width:26px;">5.</span>
+  <div>
+    <span style="font-weight:700;color:#0f172a;font-family:monospace;
+                 font-size:0.9rem;">GCP-005</span>
+    <span style="color:#334155;margin-left:8px;font-size:0.9rem;">Service accounts not using Workload Identity Federation</span>
+  </div>
+</div>
+<div style="display:flex;gap:12px;padding:12px 0;
+            border-bottom:1px solid #f1f5f9;">
+  <span style="font-weight:700;color:#475569;min-width:26px;">6.</span>
+  <div>
+    <span style="font-weight:700;color:#0f172a;font-family:monospace;
+                 font-size:0.9rem;">GCP-006</span>
+    <span style="color:#334155;margin-left:8px;font-size:0.9rem;">Test/temp service accounts in production</span>
+  </div>
+</div>
+<div style="display:flex;gap:12px;padding:12px 0;
+            border-bottom:1px solid #f1f5f9;">
+  <span style="font-weight:700;color:#475569;min-width:26px;">7.</span>
+  <div>
+    <span style="font-weight:700;color:#0f172a;font-family:monospace;
+                 font-size:0.9rem;">GCP-007</span>
+    <span style="color:#334155;margin-left:8px;font-size:0.9rem;">Editor role assigned at project scope</span>
+  </div>
+</div>
+</section>
+
+<section style="background:#fff;border:1px solid #e2e8f0;border-radius:10px;
+                padding:32px 36px;margin-bottom:28px;">
+  <h2 style="margin:0 0 20px;font-size:1.3rem;font-weight:700;color:#0f172a;">
+    Remediation Priority List — Top 10
+  </h2>
+  <div style="overflow-x:auto;">
+    <table style="width:100%;border-collapse:collapse;font-family:inherit;">
+      <thead>
+        <tr>
+          <th style="background:#f8fafc;padding:10px 12px;font-size:0.78rem;text-transform:uppercase;letter-spacing:0.06em;color:#475569;font-weight:700;text-align:left;border-bottom:2px solid #e2e8f0;">#</th>
+          <th style="background:#f8fafc;padding:10px 12px;font-size:0.78rem;text-transform:uppercase;letter-spacing:0.06em;color:#475569;font-weight:700;text-align:left;border-bottom:2px solid #e2e8f0;">Check ID</th>
+          <th style="background:#f8fafc;padding:10px 12px;font-size:0.78rem;text-transform:uppercase;letter-spacing:0.06em;color:#475569;font-weight:700;text-align:left;border-bottom:2px solid #e2e8f0;">Finding</th>
+          <th style="background:#f8fafc;padding:10px 12px;font-size:0.78rem;text-transform:uppercase;letter-spacing:0.06em;color:#475569;font-weight:700;text-align:left;border-bottom:2px solid #e2e8f0;">Severity</th>
+          <th style="background:#f8fafc;padding:10px 12px;font-size:0.78rem;text-transform:uppercase;letter-spacing:0.06em;color:#475569;font-weight:700;text-align:left;border-bottom:2px solid #e2e8f0;">Effort</th>
+          <th style="background:#f8fafc;padding:10px 12px;font-size:0.78rem;text-transform:uppercase;letter-spacing:0.06em;color:#475569;font-weight:700;text-align:left;border-bottom:2px solid #e2e8f0;">Impact</th>
+        </tr>
+      </thead>
+      <tbody>
+<tr style="border-bottom:1px solid #f1f5f9;">
+  <td style="padding:10px 12px;font-weight:700;color:#0f172a;">1</td>
+  <td style="padding:10px 12px;font-family:monospace;font-size:0.87rem;
+             font-weight:600;">GCP-001</td>
+  <td style="padding:10px 12px;font-size:0.87rem;color:#334155;">
+    Public member 'allUsers' is granted 'roles/owner'. This exposes the resource to the entire internet or all Google accounts.</td>
+  <td style="padding:10px 12px;"><span style="background:#dc2626;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">CRITICAL</span></td>
+  <td style="padding:10px 12px;">
+    <span style="color:#dc2626;font-weight:700;font-size:0.85rem;">High</span>
+  </td>
+  <td style="padding:10px 12px;font-size:0.82rem;color:#64748b;">High</td>
+</tr>
+<tr style="border-bottom:1px solid #f1f5f9;">
+  <td style="padding:10px 12px;font-weight:700;color:#0f172a;">2</td>
+  <td style="padding:10px 12px;font-family:monospace;font-size:0.87rem;
+             font-weight:600;">GCP-001</td>
+  <td style="padding:10px 12px;font-size:0.87rem;color:#334155;">
+    Public member 'allUsers' is granted 'roles/owner'. This exposes the resource to the entire internet or all Google accounts.</td>
+  <td style="padding:10px 12px;"><span style="background:#dc2626;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">CRITICAL</span></td>
+  <td style="padding:10px 12px;">
+    <span style="color:#dc2626;font-weight:700;font-size:0.85rem;">High</span>
+  </td>
+  <td style="padding:10px 12px;font-size:0.82rem;color:#64748b;">High</td>
+</tr>
+<tr style="border-bottom:1px solid #f1f5f9;">
+  <td style="padding:10px 12px;font-weight:700;color:#0f172a;">3</td>
+  <td style="padding:10px 12px;font-family:monospace;font-size:0.87rem;
+             font-weight:600;">GCP-001</td>
+  <td style="padding:10px 12px;font-size:0.87rem;color:#334155;">
+    Public member 'allAuthenticatedUsers' is granted 'roles/owner'. This exposes the resource to the entire internet or all Google accounts.</td>
+  <td style="padding:10px 12px;"><span style="background:#dc2626;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">CRITICAL</span></td>
+  <td style="padding:10px 12px;">
+    <span style="color:#dc2626;font-weight:700;font-size:0.85rem;">High</span>
+  </td>
+  <td style="padding:10px 12px;font-size:0.82rem;color:#64748b;">High</td>
+</tr>
+<tr style="border-bottom:1px solid #f1f5f9;">
+  <td style="padding:10px 12px;font-weight:700;color:#0f172a;">4</td>
+  <td style="padding:10px 12px;font-family:monospace;font-size:0.87rem;
+             font-weight:600;">CONTAINER-001</td>
+  <td style="padding:10px 12px;font-size:0.87rem;color:#334155;">
+    Service 'admin-tools' runs as a privileged container (privileged: true). Privileged mode grants full host access.</td>
+  <td style="padding:10px 12px;"><span style="background:#dc2626;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">CRITICAL</span></td>
+  <td style="padding:10px 12px;">
+    <span style="color:#d97706;font-weight:700;font-size:0.85rem;">Med</span>
+  </td>
+  <td style="padding:10px 12px;font-size:0.82rem;color:#64748b;">High</td>
+</tr>
+<tr style="border-bottom:1px solid #f1f5f9;">
+  <td style="padding:10px 12px;font-weight:700;color:#0f172a;">5</td>
+  <td style="padding:10px 12px;font-family:monospace;font-size:0.87rem;
+             font-weight:600;">CONTAINER-002</td>
+  <td style="padding:10px 12px;font-size:0.87rem;color:#334155;">
+    Service 'network-utils' uses host network mode. This bypasses container network isolation.</td>
+  <td style="padding:10px 12px;"><span style="background:#dc2626;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">CRITICAL</span></td>
+  <td style="padding:10px 12px;">
+    <span style="color:#d97706;font-weight:700;font-size:0.85rem;">Med</span>
+  </td>
+  <td style="padding:10px 12px;font-size:0.82rem;color:#64748b;">High</td>
+</tr>
+<tr style="border-bottom:1px solid #f1f5f9;">
+  <td style="padding:10px 12px;font-weight:700;color:#0f172a;">6</td>
+  <td style="padding:10px 12px;font-family:monospace;font-size:0.87rem;
+             font-weight:600;">CONTAINER-004</td>
+  <td style="padding:10px 12px;font-size:0.87rem;color:#334155;">
+    Service 'admin-tools' mounts host path '/etc/passwd' into the container. This path is sensitive and may expose system files.</td>
+  <td style="padding:10px 12px;"><span style="background:#dc2626;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">CRITICAL</span></td>
+  <td style="padding:10px 12px;">
+    <span style="color:#d97706;font-weight:700;font-size:0.85rem;">Med</span>
+  </td>
+  <td style="padding:10px 12px;font-size:0.82rem;color:#64748b;">High</td>
+</tr>
+<tr style="border-bottom:1px solid #f1f5f9;">
+  <td style="padding:10px 12px;font-weight:700;color:#0f172a;">7</td>
+  <td style="padding:10px 12px;font-family:monospace;font-size:0.87rem;
+             font-weight:600;">CONTAINER-001</td>
+  <td style="padding:10px 12px;font-size:0.87rem;color:#334155;">
+    Container 'sidecar-agent' in Deployment 'vulnerable-app' is privileged. Privileged K8s containers can escape to the host.</td>
+  <td style="padding:10px 12px;"><span style="background:#dc2626;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">CRITICAL</span></td>
+  <td style="padding:10px 12px;">
+    <span style="color:#d97706;font-weight:700;font-size:0.85rem;">Med</span>
+  </td>
+  <td style="padding:10px 12px;font-size:0.82rem;color:#64748b;">High</td>
+</tr>
+<tr style="border-bottom:1px solid #f1f5f9;">
+  <td style="padding:10px 12px;font-weight:700;color:#0f172a;">8</td>
+  <td style="padding:10px 12px;font-family:monospace;font-size:0.87rem;
+             font-weight:600;">CONTAINER-002</td>
+  <td style="padding:10px 12px;font-size:0.87rem;color:#334155;">
+    Deployment 'vulnerable-app' has hostNetwork: true. Pods share the host network namespace, bypassing network isolation.</td>
+  <td style="padding:10px 12px;"><span style="background:#dc2626;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">CRITICAL</span></td>
+  <td style="padding:10px 12px;">
+    <span style="color:#d97706;font-weight:700;font-size:0.85rem;">Med</span>
+  </td>
+  <td style="padding:10px 12px;font-size:0.82rem;color:#64748b;">High</td>
+</tr>
+<tr style="border-bottom:1px solid #f1f5f9;">
+  <td style="padding:10px 12px;font-weight:700;color:#0f172a;">9</td>
+  <td style="padding:10px 12px;font-family:monospace;font-size:0.87rem;
+             font-weight:600;">CICD-003</td>
+  <td style="padding:10px 12px;font-size:0.87rem;color:#334155;">
+    Step 'Debug API credentials' echoes a secret to the runner log. Even with log masking, secrets may leak via encoding tricks.</td>
+  <td style="padding:10px 12px;"><span style="background:#dc2626;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">CRITICAL</span></td>
+  <td style="padding:10px 12px;">
+    <span style="color:#16a34a;font-weight:700;font-size:0.85rem;">Low</span>
+  </td>
+  <td style="padding:10px 12px;font-size:0.82rem;color:#64748b;">High</td>
+</tr>
+<tr style="border-bottom:1px solid #f1f5f9;">
+  <td style="padding:10px 12px;font-weight:700;color:#0f172a;">10</td>
+  <td style="padding:10px 12px;font-family:monospace;font-size:0.87rem;
+             font-weight:600;">CICD-003</td>
+  <td style="padding:10px 12px;font-size:0.87rem;color:#334155;">
+    Step 'Login to Docker Hub' echoes a secret to the runner log. Even with log masking, secrets may leak via encoding tricks.</td>
+  <td style="padding:10px 12px;"><span style="background:#dc2626;color:#fff;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:700;">CRITICAL</span></td>
+  <td style="padding:10px 12px;">
+    <span style="color:#16a34a;font-weight:700;font-size:0.85rem;">Low</span>
+  </td>
+  <td style="padding:10px 12px;font-size:0.82rem;color:#64748b;">High</td>
+</tr></tbody>
+    </table>
+  </div>
+</section>
+
+    <footer style="text-align:center;color:#94a3b8;font-size:0.8rem;
+                   padding:24px 0;border-top:1px solid #e2e8f0;margin-top:8px;">
+      CloudGuard Security Reviewer · Generated 2026-03-14 16:14 UTC ·
+      Aligned with NIST CSF 2.0 &amp; Zero Trust Architecture (NIST SP 800-207)
+    </footer>
+  </div>
+</body>
+</html>

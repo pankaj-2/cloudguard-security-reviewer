@@ -1,0 +1,900 @@
+{
+  "nist_scores": {
+    "IDENTIFY": 90,
+    "PROTECT": 0,
+    "DETECT": 30,
+    "RESPOND": 100,
+    "RECOVER": 95
+  },
+  "zt_scores": {
+    "Identity": 0,
+    "Workload": 0,
+    "Network": 0,
+    "Data": 0,
+    "DevOps": 0
+  },
+  "overall_score": 0,
+  "maturity_band": "Initial",
+  "total_findings": 97,
+  "by_severity": {
+    "CRITICAL": 16,
+    "HIGH": 54,
+    "MEDIUM": 24,
+    "LOW": 3
+  },
+  "findings": [
+    {
+      "scanner": "gcp_iam",
+      "check_id": "GCP-001",
+      "resource": "roles/owner \u2192 allUsers",
+      "finding": "Public member 'allUsers' is granted 'roles/owner'. This exposes the resource to the entire internet or all Google accounts.",
+      "severity": "CRITICAL",
+      "recommendation": "Remove 'allUsers' and 'allAuthenticatedUsers' from all IAM bindings. Replace with specific user, service-account, or group principals.",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "gcp_iam",
+      "check_id": "GCP-001",
+      "resource": "roles/owner \u2192 allUsers",
+      "finding": "Public member 'allUsers' is granted 'roles/owner'. This exposes the resource to the entire internet or all Google accounts.",
+      "severity": "CRITICAL",
+      "recommendation": "Remove 'allUsers' and 'allAuthenticatedUsers' from all IAM bindings. Replace with specific user, service-account, or group principals.",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "gcp_iam",
+      "check_id": "GCP-001",
+      "resource": "roles/owner \u2192 allAuthenticatedUsers",
+      "finding": "Public member 'allAuthenticatedUsers' is granted 'roles/owner'. This exposes the resource to the entire internet or all Google accounts.",
+      "severity": "CRITICAL",
+      "recommendation": "Remove 'allUsers' and 'allAuthenticatedUsers' from all IAM bindings. Replace with specific user, service-account, or group principals.",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "gcp_iam",
+      "check_id": "GCP-002",
+      "resource": "roles/owner \u2192 user:developer@company.com",
+      "finding": "Human user 'user:developer@company.com' holds the Owner role at project scope. Owner grants unrestricted access to all resources and IAM policies.",
+      "severity": "HIGH",
+      "recommendation": "Remove Owner from human users. Grant least-privilege roles such as roles/editor or specific resource roles. Use groups rather than individual accounts for administrative access.",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "gcp_iam",
+      "check_id": "GCP-003",
+      "resource": "serviceAccount:test-sa@myproject.iam.gserviceaccount.com / key:key001",
+      "finding": "This service account has a user-managed (exported) key. Exported keys leave GCP's security perimeter and increase credential theft risk.",
+      "severity": "HIGH",
+      "recommendation": "Delete the exported key and migrate to Workload Identity Federation. If keys are unavoidable, store them in Secret Manager with rotation enforced.",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "gcp_iam",
+      "check_id": "GCP-003",
+      "resource": "serviceAccount:temp-migration-sa@myproject.iam.gserviceaccount.com / key:key002",
+      "finding": "This service account has a user-managed (exported) key. Exported keys leave GCP's security perimeter and increase credential theft risk.",
+      "severity": "HIGH",
+      "recommendation": "Delete the exported key and migrate to Workload Identity Federation. If keys are unavoidable, store them in Secret Manager with rotation enforced.",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "gcp_iam",
+      "check_id": "GCP-003",
+      "resource": "serviceAccount:db-client@myproject.iam.gserviceaccount.com / key:key003",
+      "finding": "This service account has a user-managed (exported) key. Exported keys leave GCP's security perimeter and increase credential theft risk.",
+      "severity": "HIGH",
+      "recommendation": "Delete the exported key and migrate to Workload Identity Federation. If keys are unavoidable, store them in Secret Manager with rotation enforced.",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "gcp_iam",
+      "check_id": "GCP-003",
+      "resource": "serviceAccount:legacy-api-sa@myproject.iam.gserviceaccount.com / key:key004",
+      "finding": "This service account has a user-managed (exported) key. Exported keys leave GCP's security perimeter and increase credential theft risk.",
+      "severity": "HIGH",
+      "recommendation": "Delete the exported key and migrate to Workload Identity Federation. If keys are unavoidable, store them in Secret Manager with rotation enforced.",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "gcp_iam",
+      "check_id": "GCP-003",
+      "resource": "serviceAccount:stale-batch-sa@myproject.iam.gserviceaccount.com / key:key005",
+      "finding": "This service account has a user-managed (exported) key. Exported keys leave GCP's security perimeter and increase credential theft risk.",
+      "severity": "HIGH",
+      "recommendation": "Delete the exported key and migrate to Workload Identity Federation. If keys are unavoidable, store them in Secret Manager with rotation enforced.",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "gcp_iam",
+      "check_id": "GCP-003",
+      "resource": "serviceAccount:etl-runner@myproject.iam.gserviceaccount.com / key:key006",
+      "finding": "This service account has a user-managed (exported) key. Exported keys leave GCP's security perimeter and increase credential theft risk.",
+      "severity": "HIGH",
+      "recommendation": "Delete the exported key and migrate to Workload Identity Federation. If keys are unavoidable, store them in Secret Manager with rotation enforced.",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "gcp_iam",
+      "check_id": "GCP-003",
+      "resource": "serviceAccount:monitoring-sa@myproject.iam.gserviceaccount.com / key:key007",
+      "finding": "This service account has a user-managed (exported) key. Exported keys leave GCP's security perimeter and increase credential theft risk.",
+      "severity": "HIGH",
+      "recommendation": "Delete the exported key and migrate to Workload Identity Federation. If keys are unavoidable, store them in Secret Manager with rotation enforced.",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "gcp_iam",
+      "check_id": "GCP-003",
+      "resource": "serviceAccount:deploy-agent@myproject.iam.gserviceaccount.com / key:key008",
+      "finding": "This service account has a user-managed (exported) key. Exported keys leave GCP's security perimeter and increase credential theft risk.",
+      "severity": "HIGH",
+      "recommendation": "Delete the exported key and migrate to Workload Identity Federation. If keys are unavoidable, store them in Secret Manager with rotation enforced.",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "gcp_iam",
+      "check_id": "GCP-003",
+      "resource": "serviceAccount:gcs-backup-sa@myproject.iam.gserviceaccount.com / key:key009",
+      "finding": "This service account has a user-managed (exported) key. Exported keys leave GCP's security perimeter and increase credential theft risk.",
+      "severity": "HIGH",
+      "recommendation": "Delete the exported key and migrate to Workload Identity Federation. If keys are unavoidable, store them in Secret Manager with rotation enforced.",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "gcp_iam",
+      "check_id": "GCP-004",
+      "resource": "serviceAccount:test-sa@myproject.iam.gserviceaccount.com / key:key001",
+      "finding": "Service account key has not been rotated in 1048 days (threshold: 90 days). Stale keys increase the blast radius of credential compromise.",
+      "severity": "HIGH",
+      "recommendation": "Rotate service account keys at least every 90 days. Prefer Workload Identity Federation to eliminate the need for long-lived keys.",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "gcp_iam",
+      "check_id": "GCP-004",
+      "resource": "serviceAccount:temp-migration-sa@myproject.iam.gserviceaccount.com / key:key002",
+      "finding": "Service account key has not been rotated in 1154 days (threshold: 90 days). Stale keys increase the blast radius of credential compromise.",
+      "severity": "HIGH",
+      "recommendation": "Rotate service account keys at least every 90 days. Prefer Workload Identity Federation to eliminate the need for long-lived keys.",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "gcp_iam",
+      "check_id": "GCP-004",
+      "resource": "serviceAccount:db-client@myproject.iam.gserviceaccount.com / key:key003",
+      "finding": "Service account key has not been rotated in 916 days (threshold: 90 days). Stale keys increase the blast radius of credential compromise.",
+      "severity": "HIGH",
+      "recommendation": "Rotate service account keys at least every 90 days. Prefer Workload Identity Federation to eliminate the need for long-lived keys.",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "gcp_iam",
+      "check_id": "GCP-004",
+      "resource": "serviceAccount:legacy-api-sa@myproject.iam.gserviceaccount.com / key:key004",
+      "finding": "Service account key has not been rotated in 1118 days (threshold: 90 days). Stale keys increase the blast radius of credential compromise.",
+      "severity": "HIGH",
+      "recommendation": "Rotate service account keys at least every 90 days. Prefer Workload Identity Federation to eliminate the need for long-lived keys.",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "gcp_iam",
+      "check_id": "GCP-004",
+      "resource": "serviceAccount:stale-batch-sa@myproject.iam.gserviceaccount.com / key:key005",
+      "finding": "Service account key has not been rotated in 1321 days (threshold: 90 days). Stale keys increase the blast radius of credential compromise.",
+      "severity": "HIGH",
+      "recommendation": "Rotate service account keys at least every 90 days. Prefer Workload Identity Federation to eliminate the need for long-lived keys.",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "gcp_iam",
+      "check_id": "GCP-004",
+      "resource": "serviceAccount:etl-runner@myproject.iam.gserviceaccount.com / key:key006",
+      "finding": "Service account key has not been rotated in 1368 days (threshold: 90 days). Stale keys increase the blast radius of credential compromise.",
+      "severity": "HIGH",
+      "recommendation": "Rotate service account keys at least every 90 days. Prefer Workload Identity Federation to eliminate the need for long-lived keys.",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "gcp_iam",
+      "check_id": "GCP-004",
+      "resource": "serviceAccount:monitoring-sa@myproject.iam.gserviceaccount.com / key:key007",
+      "finding": "Service account key has not been rotated in 1443 days (threshold: 90 days). Stale keys increase the blast radius of credential compromise.",
+      "severity": "HIGH",
+      "recommendation": "Rotate service account keys at least every 90 days. Prefer Workload Identity Federation to eliminate the need for long-lived keys.",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "gcp_iam",
+      "check_id": "GCP-004",
+      "resource": "serviceAccount:deploy-agent@myproject.iam.gserviceaccount.com / key:key008",
+      "finding": "Service account key has not been rotated in 794 days (threshold: 90 days). Stale keys increase the blast radius of credential compromise.",
+      "severity": "HIGH",
+      "recommendation": "Rotate service account keys at least every 90 days. Prefer Workload Identity Federation to eliminate the need for long-lived keys.",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "gcp_iam",
+      "check_id": "GCP-004",
+      "resource": "serviceAccount:gcs-backup-sa@myproject.iam.gserviceaccount.com / key:key009",
+      "finding": "Service account key has not been rotated in 739 days (threshold: 90 days). Stale keys increase the blast radius of credential compromise.",
+      "severity": "HIGH",
+      "recommendation": "Rotate service account keys at least every 90 days. Prefer Workload Identity Federation to eliminate the need for long-lived keys.",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "gcp_iam",
+      "check_id": "GCP-005",
+      "resource": "serviceAccount:test-sa@myproject.iam.gserviceaccount.com",
+      "finding": "Service account uses key-based authentication and has no Workload Identity Federation binding configured. Key-based auth requires managing long-lived secrets.",
+      "severity": "MEDIUM",
+      "recommendation": "Configure Workload Identity Federation and remove exported keys. WIF allows workloads to impersonate service accounts without downloading key files.",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "gcp_iam",
+      "check_id": "GCP-005",
+      "resource": "serviceAccount:temp-migration-sa@myproject.iam.gserviceaccount.com",
+      "finding": "Service account uses key-based authentication and has no Workload Identity Federation binding configured. Key-based auth requires managing long-lived secrets.",
+      "severity": "MEDIUM",
+      "recommendation": "Configure Workload Identity Federation and remove exported keys. WIF allows workloads to impersonate service accounts without downloading key files.",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "gcp_iam",
+      "check_id": "GCP-005",
+      "resource": "serviceAccount:db-client@myproject.iam.gserviceaccount.com",
+      "finding": "Service account uses key-based authentication and has no Workload Identity Federation binding configured. Key-based auth requires managing long-lived secrets.",
+      "severity": "MEDIUM",
+      "recommendation": "Configure Workload Identity Federation and remove exported keys. WIF allows workloads to impersonate service accounts without downloading key files.",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "gcp_iam",
+      "check_id": "GCP-005",
+      "resource": "serviceAccount:legacy-api-sa@myproject.iam.gserviceaccount.com",
+      "finding": "Service account uses key-based authentication and has no Workload Identity Federation binding configured. Key-based auth requires managing long-lived secrets.",
+      "severity": "MEDIUM",
+      "recommendation": "Configure Workload Identity Federation and remove exported keys. WIF allows workloads to impersonate service accounts without downloading key files.",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "gcp_iam",
+      "check_id": "GCP-005",
+      "resource": "serviceAccount:stale-batch-sa@myproject.iam.gserviceaccount.com",
+      "finding": "Service account uses key-based authentication and has no Workload Identity Federation binding configured. Key-based auth requires managing long-lived secrets.",
+      "severity": "MEDIUM",
+      "recommendation": "Configure Workload Identity Federation and remove exported keys. WIF allows workloads to impersonate service accounts without downloading key files.",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "gcp_iam",
+      "check_id": "GCP-005",
+      "resource": "serviceAccount:etl-runner@myproject.iam.gserviceaccount.com",
+      "finding": "Service account uses key-based authentication and has no Workload Identity Federation binding configured. Key-based auth requires managing long-lived secrets.",
+      "severity": "MEDIUM",
+      "recommendation": "Configure Workload Identity Federation and remove exported keys. WIF allows workloads to impersonate service accounts without downloading key files.",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "gcp_iam",
+      "check_id": "GCP-005",
+      "resource": "serviceAccount:monitoring-sa@myproject.iam.gserviceaccount.com",
+      "finding": "Service account uses key-based authentication and has no Workload Identity Federation binding configured. Key-based auth requires managing long-lived secrets.",
+      "severity": "MEDIUM",
+      "recommendation": "Configure Workload Identity Federation and remove exported keys. WIF allows workloads to impersonate service accounts without downloading key files.",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "gcp_iam",
+      "check_id": "GCP-005",
+      "resource": "serviceAccount:deploy-agent@myproject.iam.gserviceaccount.com",
+      "finding": "Service account uses key-based authentication and has no Workload Identity Federation binding configured. Key-based auth requires managing long-lived secrets.",
+      "severity": "MEDIUM",
+      "recommendation": "Configure Workload Identity Federation and remove exported keys. WIF allows workloads to impersonate service accounts without downloading key files.",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "gcp_iam",
+      "check_id": "GCP-005",
+      "resource": "serviceAccount:gcs-backup-sa@myproject.iam.gserviceaccount.com",
+      "finding": "Service account uses key-based authentication and has no Workload Identity Federation binding configured. Key-based auth requires managing long-lived secrets.",
+      "severity": "MEDIUM",
+      "recommendation": "Configure Workload Identity Federation and remove exported keys. WIF allows workloads to impersonate service accounts without downloading key files.",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "gcp_iam",
+      "check_id": "GCP-006",
+      "resource": "serviceAccount:test-sa@myproject.iam.gserviceaccount.com",
+      "finding": "Service account 'test-sa@myproject.iam.gserviceaccount.com' (display: 'test account for integration testing') has test/temporary naming conventions suggesting it was created for development or testing and should not exist in a production environment.",
+      "severity": "MEDIUM",
+      "recommendation": "Audit test and temporary service accounts. Delete or disable those not required in production. Enforce a naming policy to prevent test accounts entering prod.",
+      "nist_csf_function": "IDENTIFY"
+    },
+    {
+      "scanner": "gcp_iam",
+      "check_id": "GCP-006",
+      "resource": "serviceAccount:temp-migration-sa@myproject.iam.gserviceaccount.com",
+      "finding": "Service account 'temp-migration-sa@myproject.iam.gserviceaccount.com' (display: 'temp migration helper') has test/temporary naming conventions suggesting it was created for development or testing and should not exist in a production environment.",
+      "severity": "MEDIUM",
+      "recommendation": "Audit test and temporary service accounts. Delete or disable those not required in production. Enforce a naming policy to prevent test accounts entering prod.",
+      "nist_csf_function": "IDENTIFY"
+    },
+    {
+      "scanner": "gcp_iam",
+      "check_id": "GCP-007",
+      "resource": "roles/editor \u2192 serviceAccount:app-sa@myproject.iam.gserviceaccount.com",
+      "finding": "'serviceAccount:app-sa@myproject.iam.gserviceaccount.com' holds the Editor role at project scope. Editor grants read/write access to most GCP services and violates least-privilege.",
+      "severity": "HIGH",
+      "recommendation": "Replace roles/editor with purpose-specific roles (e.g., roles/storage.objectAdmin, roles/cloudsql.editor). Apply roles at the minimum required resource scope.",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "gcp_iam",
+      "check_id": "GCP-007",
+      "resource": "roles/editor \u2192 user:backend-dev@company.com",
+      "finding": "'user:backend-dev@company.com' holds the Editor role at project scope. Editor grants read/write access to most GCP services and violates least-privilege.",
+      "severity": "HIGH",
+      "recommendation": "Replace roles/editor with purpose-specific roles (e.g., roles/storage.objectAdmin, roles/cloudsql.editor). Apply roles at the minimum required resource scope.",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "gcp_iam",
+      "check_id": "GCP-007",
+      "resource": "roles/editor \u2192 user:intern@company.com",
+      "finding": "'user:intern@company.com' holds the Editor role at project scope. Editor grants read/write access to most GCP services and violates least-privilege.",
+      "severity": "HIGH",
+      "recommendation": "Replace roles/editor with purpose-specific roles (e.g., roles/storage.objectAdmin, roles/cloudsql.editor). Apply roles at the minimum required resource scope.",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "gcp_iam",
+      "check_id": "GCP-007",
+      "resource": "roles/editor \u2192 group:engineering@company.com",
+      "finding": "'group:engineering@company.com' holds the Editor role at project scope. Editor grants read/write access to most GCP services and violates least-privilege.",
+      "severity": "HIGH",
+      "recommendation": "Replace roles/editor with purpose-specific roles (e.g., roles/storage.objectAdmin, roles/cloudsql.editor). Apply roles at the minimum required resource scope.",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "container",
+      "check_id": "CONTAINER-001",
+      "resource": "docker-compose/service:admin-tools",
+      "finding": "Service 'admin-tools' runs as a privileged container (privileged: true). Privileged mode grants full host access.",
+      "severity": "CRITICAL",
+      "recommendation": "Remove 'privileged: true'. Use specific Linux capabilities (cap_add) for only what is needed. Prefer rootless containers and AppArmor/seccomp profiles.",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "container",
+      "check_id": "CONTAINER-002",
+      "resource": "docker-compose/service:network-utils",
+      "finding": "Service 'network-utils' uses host network mode. This bypasses container network isolation.",
+      "severity": "CRITICAL",
+      "recommendation": "Remove 'network_mode: host'. Use bridge networking with explicit port mappings instead.",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "container",
+      "check_id": "CONTAINER-003",
+      "resource": "docker-compose/service:admin-tools/env:ADMIN_TOKEN",
+      "finding": "Service 'admin-tools' has a potential hardcoded secret in environment variable 'ADMIN_TOKEN'.",
+      "severity": "HIGH",
+      "recommendation": "Remove hardcoded credentials from docker-compose files. Use Docker Secrets, environment variable files (.env), or a secret manager (e.g., Vault, AWS Secrets Manager).",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "container",
+      "check_id": "CONTAINER-003",
+      "resource": "docker-compose/service:postgres/env:POSTGRES_PASSWORD",
+      "finding": "Service 'postgres' has a potential hardcoded secret in environment variable 'POSTGRES_PASSWORD'.",
+      "severity": "HIGH",
+      "recommendation": "Remove hardcoded credentials from docker-compose files. Use Docker Secrets, environment variable files (.env), or a secret manager (e.g., Vault, AWS Secrets Manager).",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "container",
+      "check_id": "CONTAINER-003",
+      "resource": "docker-compose/service:api-service/env:API_KEY",
+      "finding": "Service 'api-service' has a potential hardcoded secret in environment variable 'API_KEY'.",
+      "severity": "HIGH",
+      "recommendation": "Remove hardcoded credentials from docker-compose files. Use Docker Secrets, environment variable files (.env), or a secret manager (e.g., Vault, AWS Secrets Manager).",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "container",
+      "check_id": "CONTAINER-003",
+      "resource": "docker-compose/service:api-service/env:DB_PASSWORD",
+      "finding": "Service 'api-service' has a potential hardcoded secret in environment variable 'DB_PASSWORD'.",
+      "severity": "HIGH",
+      "recommendation": "Remove hardcoded credentials from docker-compose files. Use Docker Secrets, environment variable files (.env), or a secret manager (e.g., Vault, AWS Secrets Manager).",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "container",
+      "check_id": "CONTAINER-003",
+      "resource": "docker-compose/service:api-service/env:JWT_SECRET",
+      "finding": "Service 'api-service' has a potential hardcoded secret in environment variable 'JWT_SECRET'.",
+      "severity": "HIGH",
+      "recommendation": "Remove hardcoded credentials from docker-compose files. Use Docker Secrets, environment variable files (.env), or a secret manager (e.g., Vault, AWS Secrets Manager).",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "container",
+      "check_id": "CONTAINER-004",
+      "resource": "docker-compose/service:admin-tools/volume:/etc/passwd:/etc/passwd:ro",
+      "finding": "Service 'admin-tools' mounts host path '/etc/passwd' into the container. This path is sensitive and may expose system files.",
+      "severity": "CRITICAL",
+      "recommendation": "Replace host path mounts with named Docker volumes. For system-level access, evaluate whether it is strictly necessary and apply read-only mounts where possible.",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "container",
+      "check_id": "CONTAINER-006",
+      "resource": "docker-compose/service:admin-tools",
+      "finding": "Service 'admin-tools' has no 'user' directive. Containers run as root (UID 0) by default.",
+      "severity": "HIGH",
+      "recommendation": "Add 'user: \"<uid>:<gid>\"' to the service definition. Use a non-root UID (e.g., 1000:1000). Ensure the base image supports running as non-root.",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "container",
+      "check_id": "CONTAINER-006",
+      "resource": "docker-compose/service:network-utils",
+      "finding": "Service 'network-utils' has no 'user' directive. Containers run as root (UID 0) by default.",
+      "severity": "HIGH",
+      "recommendation": "Add 'user: \"<uid>:<gid>\"' to the service definition. Use a non-root UID (e.g., 1000:1000). Ensure the base image supports running as non-root.",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "container",
+      "check_id": "CONTAINER-006",
+      "resource": "docker-compose/service:postgres",
+      "finding": "Service 'postgres' has no 'user' directive. Containers run as root (UID 0) by default.",
+      "severity": "HIGH",
+      "recommendation": "Add 'user: \"<uid>:<gid>\"' to the service definition. Use a non-root UID (e.g., 1000:1000). Ensure the base image supports running as non-root.",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "container",
+      "check_id": "CONTAINER-006",
+      "resource": "docker-compose/service:api-service",
+      "finding": "Service 'api-service' has no 'user' directive. Containers run as root (UID 0) by default.",
+      "severity": "HIGH",
+      "recommendation": "Add 'user: \"<uid>:<gid>\"' to the service definition. Use a non-root UID (e.g., 1000:1000). Ensure the base image supports running as non-root.",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "container",
+      "check_id": "CONTAINER-006",
+      "resource": "docker-compose/service:web-proxy",
+      "finding": "Service 'web-proxy' has no 'user' directive. Containers run as root (UID 0) by default.",
+      "severity": "HIGH",
+      "recommendation": "Add 'user: \"<uid>:<gid>\"' to the service definition. Use a non-root UID (e.g., 1000:1000). Ensure the base image supports running as non-root.",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "container",
+      "check_id": "CONTAINER-007",
+      "resource": "docker-compose/service:admin-tools/image:busybox:latest",
+      "finding": "Service 'admin-tools' uses unpinned image tag 'busybox:latest'. :latest is mutable and may pull a different image silently.",
+      "severity": "MEDIUM",
+      "recommendation": "Pin images to an immutable digest: 'image: myimage:v1.2.3@sha256:<digest>'. Use image scanning in CI/CD to validate pinned images.",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "container",
+      "check_id": "CONTAINER-007",
+      "resource": "docker-compose/service:network-utils/image:nicolaka/netshoot:latest",
+      "finding": "Service 'network-utils' uses unpinned image tag 'nicolaka/netshoot:latest'. :latest is mutable and may pull a different image silently.",
+      "severity": "MEDIUM",
+      "recommendation": "Pin images to an immutable digest: 'image: myimage:v1.2.3@sha256:<digest>'. Use image scanning in CI/CD to validate pinned images.",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "container",
+      "check_id": "CONTAINER-007",
+      "resource": "docker-compose/service:web-proxy/image:nginx:latest",
+      "finding": "Service 'web-proxy' uses unpinned image tag 'nginx:latest'. :latest is mutable and may pull a different image silently.",
+      "severity": "MEDIUM",
+      "recommendation": "Pin images to an immutable digest: 'image: myimage:v1.2.3@sha256:<digest>'. Use image scanning in CI/CD to validate pinned images.",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "container",
+      "check_id": "CONTAINER-001",
+      "resource": "k8s/Deployment:vulnerable-app/container:sidecar-agent",
+      "finding": "Container 'sidecar-agent' in Deployment 'vulnerable-app' is privileged. Privileged K8s containers can escape to the host.",
+      "severity": "CRITICAL",
+      "recommendation": "Set 'securityContext.privileged: false'. Use specific capabilities (capabilities.add) for only what is required.",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "container",
+      "check_id": "CONTAINER-002",
+      "resource": "k8s/Deployment:vulnerable-app",
+      "finding": "Deployment 'vulnerable-app' has hostNetwork: true. Pods share the host network namespace, bypassing network isolation.",
+      "severity": "CRITICAL",
+      "recommendation": "Set 'hostNetwork: false' or remove the field. Use ClusterIP services and ingress controllers instead of direct host networking.",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "container",
+      "check_id": "CONTAINER-003",
+      "resource": "k8s/Deployment:vulnerable-app/container:main-app/env:DB_PASSWORD",
+      "finding": "Container 'main-app' has a potential hardcoded secret in env var 'DB_PASSWORD'.",
+      "severity": "HIGH",
+      "recommendation": "Use Kubernetes Secrets with secretKeyRef or a secrets manager (e.g., Vault, AWS Secrets Manager with CSI driver). Never store credentials as plaintext in manifests.",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "container",
+      "check_id": "CONTAINER-003",
+      "resource": "k8s/Deployment:vulnerable-app/container:main-app/env:API_KEY",
+      "finding": "Container 'main-app' has a potential hardcoded secret in env var 'API_KEY'.",
+      "severity": "HIGH",
+      "recommendation": "Use Kubernetes Secrets with secretKeyRef or a secrets manager (e.g., Vault, AWS Secrets Manager with CSI driver). Never store credentials as plaintext in manifests.",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "container",
+      "check_id": "CONTAINER-003",
+      "resource": "k8s/Deployment:vulnerable-app/container:main-app/env:JWT_SECRET",
+      "finding": "Container 'main-app' has a potential hardcoded secret in env var 'JWT_SECRET'.",
+      "severity": "HIGH",
+      "recommendation": "Use Kubernetes Secrets with secretKeyRef or a secrets manager (e.g., Vault, AWS Secrets Manager with CSI driver). Never store credentials as plaintext in manifests.",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "container",
+      "check_id": "CONTAINER-003",
+      "resource": "k8s/Deployment:vulnerable-app/container:sidecar-agent/env:DD_API_KEY",
+      "finding": "Container 'sidecar-agent' has a potential hardcoded secret in env var 'DD_API_KEY'.",
+      "severity": "HIGH",
+      "recommendation": "Use Kubernetes Secrets with secretKeyRef or a secrets manager (e.g., Vault, AWS Secrets Manager with CSI driver). Never store credentials as plaintext in manifests.",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "container",
+      "check_id": "CONTAINER-004",
+      "resource": "k8s/Deployment:vulnerable-app/volume:varlog",
+      "finding": "Deployment 'vulnerable-app' mounts host path '/var/log' via hostPath volume. This grants container access to host filesystem data.",
+      "severity": "MEDIUM",
+      "recommendation": "Replace hostPath volumes with PersistentVolumeClaims backed by a storage class. For log access use sidecar log-forwarder patterns.",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "container",
+      "check_id": "CONTAINER-005",
+      "resource": "k8s/Deployment:vulnerable-app/container:main-app",
+      "finding": "Container 'main-app' in Deployment 'vulnerable-app' has no securityContext. Container will inherit permissive defaults.",
+      "severity": "HIGH",
+      "recommendation": "Define a securityContext with at minimum: allowPrivilegeEscalation: false, readOnlyRootFilesystem: true, runAsNonRoot: true, and capabilities.drop: [ALL].",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "container",
+      "check_id": "CONTAINER-005",
+      "resource": "k8s/Deployment:vulnerable-app/container:log-forwarder",
+      "finding": "Container 'log-forwarder' in Deployment 'vulnerable-app' has no securityContext. Container will inherit permissive defaults.",
+      "severity": "HIGH",
+      "recommendation": "Define a securityContext with at minimum: allowPrivilegeEscalation: false, readOnlyRootFilesystem: true, runAsNonRoot: true, and capabilities.drop: [ALL].",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "container",
+      "check_id": "CONTAINER-006",
+      "resource": "k8s/Deployment:vulnerable-app/container:sidecar-agent",
+      "finding": "Container 'sidecar-agent' in Deployment 'vulnerable-app' explicitly sets runAsUser: 0 (root). Root containers can escalate to host.",
+      "severity": "HIGH",
+      "recommendation": "Set runAsUser to a non-zero UID (e.g., 1000). Add runAsNonRoot: true to the pod securityContext as an additional guard.",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "container",
+      "check_id": "CONTAINER-007",
+      "resource": "k8s/Deployment:vulnerable-app/container:main-app/image:myapp:latest",
+      "finding": "Container 'main-app' uses unpinned image 'myapp:latest'. Mutable tags can lead to unintended image upgrades.",
+      "severity": "MEDIUM",
+      "recommendation": "Pin images to a SHA256 digest: 'image: myimage:v1.2.3@sha256:<hash>'. Enforce digest pinning via admission controller or OPA policy.",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "container",
+      "check_id": "CONTAINER-007",
+      "resource": "k8s/Deployment:vulnerable-app/container:sidecar-agent/image:datadog/agent:latest",
+      "finding": "Container 'sidecar-agent' uses unpinned image 'datadog/agent:latest'. Mutable tags can lead to unintended image upgrades.",
+      "severity": "MEDIUM",
+      "recommendation": "Pin images to a SHA256 digest: 'image: myimage:v1.2.3@sha256:<hash>'. Enforce digest pinning via admission controller or OPA policy.",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "container",
+      "check_id": "CONTAINER-008",
+      "resource": "k8s/Deployment:vulnerable-app/container:main-app",
+      "finding": "Container 'main-app' in Deployment 'vulnerable-app' is missing CPU and/or memory resource limits. Unbounded containers risk resource exhaustion (DoS).",
+      "severity": "MEDIUM",
+      "recommendation": "Define both 'resources.limits.cpu' and 'resources.limits.memory'. Also set 'resources.requests' to aid scheduler placement. Consider LimitRange objects to enforce defaults cluster-wide.",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "container",
+      "check_id": "CONTAINER-008",
+      "resource": "k8s/Deployment:vulnerable-app/container:sidecar-agent",
+      "finding": "Container 'sidecar-agent' in Deployment 'vulnerable-app' is missing CPU and/or memory resource limits. Unbounded containers risk resource exhaustion (DoS).",
+      "severity": "MEDIUM",
+      "recommendation": "Define both 'resources.limits.cpu' and 'resources.limits.memory'. Also set 'resources.requests' to aid scheduler placement. Consider LimitRange objects to enforce defaults cluster-wide.",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "container",
+      "check_id": "CONTAINER-008",
+      "resource": "k8s/Deployment:vulnerable-app/container:log-forwarder",
+      "finding": "Container 'log-forwarder' in Deployment 'vulnerable-app' is missing CPU and/or memory resource limits. Unbounded containers risk resource exhaustion (DoS).",
+      "severity": "MEDIUM",
+      "recommendation": "Define both 'resources.limits.cpu' and 'resources.limits.memory'. Also set 'resources.requests' to aid scheduler placement. Consider LimitRange objects to enforce defaults cluster-wide.",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "container",
+      "check_id": "CONTAINER-009",
+      "resource": "k8s/ClusterRoleBinding:app-admin-binding/subject:app-service-account",
+      "finding": "ClusterRoleBinding 'app-admin-binding' grants 'cluster-admin' to 'ServiceAccount:app-service-account'. This provides cluster-wide privileged access.",
+      "severity": "HIGH",
+      "recommendation": "Replace cluster-admin with narrowly scoped Roles and RoleBindings limited to specific namespaces and verbs. Apply least-privilege RBAC using the principle of minimal required access.",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "container",
+      "check_id": "CONTAINER-010",
+      "resource": "k8s/ServiceAccount:default/app-service-account",
+      "finding": "ServiceAccount 'default/app-service-account' has automountServiceAccountToken: true and is bound to a broad RBAC role. Any pod using this SA automatically receives a high-privilege token.",
+      "severity": "HIGH",
+      "recommendation": "Set 'automountServiceAccountToken: false' on the ServiceAccount and opt-in per-pod only where required. Restrict the bound role to minimal required permissions.",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "cicd",
+      "check_id": "CICD-001",
+      "resource": "workflow:permissions",
+      "finding": "Workflow permissions set to 'write-all'. Grants write access to all repository scopes.",
+      "severity": "HIGH",
+      "recommendation": "Replace 'permissions: write-all' with explicit minimal permissions per-job.",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "cicd",
+      "check_id": "CICD-002",
+      "resource": "job:build/step:Checkout code",
+      "finding": "Action 'actions/checkout@v2' is not pinned to a full commit SHA. Tags are mutable and can be updated to malicious commits (supply-chain attack vector).",
+      "severity": "HIGH",
+      "recommendation": "Pin to a full SHA: 'uses: actions/checkout@<40-char-sha>'. Use Dependabot or pin-github-action to automate pinning.",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "cicd",
+      "check_id": "CICD-002",
+      "resource": "job:build/step:Setup Node",
+      "finding": "Action 'actions/setup-node@v3' is not pinned to a full commit SHA. Tags are mutable and can be updated to malicious commits (supply-chain attack vector).",
+      "severity": "HIGH",
+      "recommendation": "Pin to a full SHA: 'uses: actions/setup-node@<40-char-sha>'. Use Dependabot or pin-github-action to automate pinning.",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "cicd",
+      "check_id": "CICD-002",
+      "resource": "job:build/step:Upload coverage",
+      "finding": "Action 'codecov/codecov-action@v1' is not pinned to a full commit SHA. Tags are mutable and can be updated to malicious commits (supply-chain attack vector).",
+      "severity": "HIGH",
+      "recommendation": "Pin to a full SHA: 'uses: codecov/codecov-action@<40-char-sha>'. Use Dependabot or pin-github-action to automate pinning.",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "cicd",
+      "check_id": "CICD-002",
+      "resource": "job:docker-build/step:actions/checkout@v2",
+      "finding": "Action 'actions/checkout@v2' is not pinned to a full commit SHA. Tags are mutable and can be updated to malicious commits (supply-chain attack vector).",
+      "severity": "HIGH",
+      "recommendation": "Pin to a full SHA: 'uses: actions/checkout@<40-char-sha>'. Use Dependabot or pin-github-action to automate pinning.",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "cicd",
+      "check_id": "CICD-002",
+      "resource": "job:deploy/step:actions/checkout@v2",
+      "finding": "Action 'actions/checkout@v2' is not pinned to a full commit SHA. Tags are mutable and can be updated to malicious commits (supply-chain attack vector).",
+      "severity": "HIGH",
+      "recommendation": "Pin to a full SHA: 'uses: actions/checkout@<40-char-sha>'. Use Dependabot or pin-github-action to automate pinning.",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "cicd",
+      "check_id": "CICD-003",
+      "resource": "job:build/step:Debug API credentials",
+      "finding": "Step 'Debug API credentials' echoes a secret to the runner log. Even with log masking, secrets may leak via encoding tricks.",
+      "severity": "CRITICAL",
+      "recommendation": "Remove debug echo statements referencing ${{ secrets.* }}. Use '::add-mask::' only for dynamic values if absolutely needed.",
+      "nist_csf_function": "DETECT"
+    },
+    {
+      "scanner": "cicd",
+      "check_id": "CICD-003",
+      "resource": "job:docker-build/step:Login to Docker Hub",
+      "finding": "Step 'Login to Docker Hub' echoes a secret to the runner log. Even with log masking, secrets may leak via encoding tricks.",
+      "severity": "CRITICAL",
+      "recommendation": "Remove debug echo statements referencing ${{ secrets.* }}. Use '::add-mask::' only for dynamic values if absolutely needed.",
+      "nist_csf_function": "DETECT"
+    },
+    {
+      "scanner": "cicd",
+      "check_id": "CICD-003",
+      "resource": "job:deploy/step:Configure kubectl",
+      "finding": "Step 'Configure kubectl' echoes a secret to the runner log. Even with log masking, secrets may leak via encoding tricks.",
+      "severity": "CRITICAL",
+      "recommendation": "Remove debug echo statements referencing ${{ secrets.* }}. Use '::add-mask::' only for dynamic values if absolutely needed.",
+      "nist_csf_function": "DETECT"
+    },
+    {
+      "scanner": "cicd",
+      "check_id": "CICD-005",
+      "resource": "workflow/env:ACTIONS_RUNNER_DEBUG",
+      "finding": "Debug flag 'ACTIONS_RUNNER_DEBUG' is permanently enabled. Debug mode may dump environment variables and secret values to the run log.",
+      "severity": "MEDIUM",
+      "recommendation": "Remove 'ACTIONS_RUNNER_DEBUG' from the YAML. Enable via repository secret on a per-run basis.",
+      "nist_csf_function": "DETECT"
+    },
+    {
+      "scanner": "cicd",
+      "check_id": "CICD-005",
+      "resource": "workflow/env:ACTIONS_STEP_DEBUG",
+      "finding": "Debug flag 'ACTIONS_STEP_DEBUG' is permanently enabled. Debug mode may dump environment variables and secret values to the run log.",
+      "severity": "MEDIUM",
+      "recommendation": "Remove 'ACTIONS_STEP_DEBUG' from the YAML. Enable via repository secret on a per-run basis.",
+      "nist_csf_function": "DETECT"
+    },
+    {
+      "scanner": "cicd",
+      "check_id": "CICD-006",
+      "resource": "job:build",
+      "finding": "Job 'build' has no 'timeout-minutes'. A hung job consumes runner minutes until GitHub's 6-hour default \u2014 a cost/resource risk.",
+      "severity": "LOW",
+      "recommendation": "Add 'timeout-minutes: <N>' to each job. Most jobs should complete in < 30 min.",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "cicd",
+      "check_id": "CICD-006",
+      "resource": "job:docker-build",
+      "finding": "Job 'docker-build' has no 'timeout-minutes'. A hung job consumes runner minutes until GitHub's 6-hour default \u2014 a cost/resource risk.",
+      "severity": "LOW",
+      "recommendation": "Add 'timeout-minutes: <N>' to each job. Most jobs should complete in < 30 min.",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "cicd",
+      "check_id": "CICD-006",
+      "resource": "job:deploy",
+      "finding": "Job 'deploy' has no 'timeout-minutes'. A hung job consumes runner minutes until GitHub's 6-hour default \u2014 a cost/resource risk.",
+      "severity": "LOW",
+      "recommendation": "Add 'timeout-minutes: <N>' to each job. Most jobs should complete in < 30 min.",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "terraform",
+      "check_id": "TF-001",
+      "resource": "google_project_iam_binding.public_owner",
+      "finding": "IAM binding grants 'roles/owner' to public member 'allUsers'. This exposes your project to the entire internet or all Google accounts.",
+      "severity": "CRITICAL",
+      "recommendation": "Remove 'allUsers' and 'allAuthenticatedUsers' from all IAM bindings. Replace with specific principals (user:, serviceAccount:, group:).",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "terraform",
+      "check_id": "TF-001",
+      "resource": "google_project_iam_binding.public_owner",
+      "finding": "IAM binding grants 'roles/owner' to public member 'allAuthenticatedUsers'. This exposes your project to the entire internet or all Google accounts.",
+      "severity": "CRITICAL",
+      "recommendation": "Remove 'allUsers' and 'allAuthenticatedUsers' from all IAM bindings. Replace with specific principals (user:, serviceAccount:, group:).",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "terraform",
+      "check_id": "TF-002",
+      "resource": "google_service_account_key.deploy_sa_key",
+      "finding": "Terraform creates an exported service account key. Key material leaves GCP's security perimeter and is stored in Terraform state (often plaintext).",
+      "severity": "HIGH",
+      "recommendation": "Delete the google_service_account_key resource and migrate to Workload Identity Federation. If keys are unavoidable, store in Secret Manager with rotation.",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "terraform",
+      "check_id": "TF-003",
+      "resource": "google_compute_firewall.allow_all_ingress",
+      "finding": "Firewall rule 'allow_all_ingress' allows all TCP ports from 0.0.0.0/0 (the entire internet). This creates a very large attack surface.",
+      "severity": "CRITICAL",
+      "recommendation": "Restrict source_ranges to known IP ranges and limit allowed ports to only those required. Use firewall tags and VPC Service Controls to reduce scope.",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "terraform",
+      "check_id": "TF-004",
+      "resource": "google_storage_bucket.app_data",
+      "finding": "Bucket 'app_data' has uniform_bucket_level_access disabled. Object-level ACLs can bypass bucket IAM policies, leading to over-permissive access.",
+      "severity": "HIGH",
+      "recommendation": "Set 'uniform_bucket_level_access = true'. Migrate any object ACLs to bucket-level IAM policies beforehand.",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "terraform",
+      "check_id": "TF-005",
+      "resource": "google_compute_instance.app_server",
+      "finding": "Instance 'app_server' has OS Login disabled (enable-oslogin = false). Without OS Login, SSH access falls back to project/instance SSH keys which are harder to audit and revoke.",
+      "severity": "MEDIUM",
+      "recommendation": "Set 'enable-oslogin = \"true\"' in the instance metadata block. OS Login integrates with Cloud IAM for centralized SSH key management.",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "terraform",
+      "check_id": "TF-006",
+      "resource": "google_compute_instance.app_server",
+      "finding": "Instance 'app_server' uses the 'cloud-platform' scope, which grants the instance's service account access to all Google Cloud APIs.",
+      "severity": "HIGH",
+      "recommendation": "Replace 'cloud-platform' with specific API scopes (e.g., 'storage.read_only', 'logging.write'). Apply least privilege at both the scope and IAM role level.",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "terraform",
+      "check_id": "TF-007",
+      "resource": "google_storage_bucket.app_data",
+      "finding": "Bucket 'app_data' does not have versioning enabled. Accidental or malicious deletions/overwrites cannot be recovered.",
+      "severity": "MEDIUM",
+      "recommendation": "Add 'versioning { enabled = true }' to the bucket. Combine with Object Lifecycle rules to manage storage costs.",
+      "nist_csf_function": "RECOVER"
+    },
+    {
+      "scanner": "terraform",
+      "check_id": "TF-008",
+      "resource": "google_project_iam_binding.public_owner \u2192 allUsers",
+      "finding": "Principal 'allUsers' is granted 'roles/owner' at project scope. Owner grants unrestricted access to GCP resources.",
+      "severity": "CRITICAL",
+      "recommendation": "Replace 'roles/owner' with purpose-specific predefined or custom roles. Apply at the minimum necessary resource scope (not project-wide).",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "terraform",
+      "check_id": "TF-008",
+      "resource": "google_project_iam_binding.public_owner \u2192 allAuthenticatedUsers",
+      "finding": "Principal 'allAuthenticatedUsers' is granted 'roles/owner' at project scope. Owner grants unrestricted access to GCP resources.",
+      "severity": "CRITICAL",
+      "recommendation": "Replace 'roles/owner' with purpose-specific predefined or custom roles. Apply at the minimum necessary resource scope (not project-wide).",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "terraform",
+      "check_id": "TF-008",
+      "resource": "google_project_iam_binding.broad_editor \u2192 user:developer@company.com",
+      "finding": "Principal 'user:developer@company.com' is granted 'roles/editor' at project scope. Editor grants unrestricted access to GCP resources.",
+      "severity": "HIGH",
+      "recommendation": "Replace 'roles/editor' with purpose-specific predefined or custom roles. Apply at the minimum necessary resource scope (not project-wide).",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "terraform",
+      "check_id": "TF-008",
+      "resource": "google_project_iam_binding.broad_editor \u2192 user:contractor@external.com",
+      "finding": "Principal 'user:contractor@external.com' is granted 'roles/editor' at project scope. Editor grants unrestricted access to GCP resources.",
+      "severity": "HIGH",
+      "recommendation": "Replace 'roles/editor' with purpose-specific predefined or custom roles. Apply at the minimum necessary resource scope (not project-wide).",
+      "nist_csf_function": "PROTECT"
+    },
+    {
+      "scanner": "terraform",
+      "check_id": "TF-008",
+      "resource": "google_project_iam_binding.broad_editor \u2192 group:engineering@company.com",
+      "finding": "Principal 'group:engineering@company.com' is granted 'roles/editor' at project scope. Editor grants unrestricted access to GCP resources.",
+      "severity": "HIGH",
+      "recommendation": "Replace 'roles/editor' with purpose-specific predefined or custom roles. Apply at the minimum necessary resource scope (not project-wide).",
+      "nist_csf_function": "PROTECT"
+    }
+  ]
+}
